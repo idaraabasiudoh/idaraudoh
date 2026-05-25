@@ -319,9 +319,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <!-- Launchpad Overlay -->
   <div class="launchpad-overlay" id="launchpad-overlay">
-    <div class="launchpad-search">
-      <input type="text" placeholder="Search" spellcheck="false" autocomplete="off" />
-    </div>
     <div class="launchpad-container">
       <div class="launchpad-group">
         <h3>Resume</h3>
@@ -362,6 +359,12 @@ function switchTab(tabId: string) {
   
   document.querySelectorAll('.dock-icon[data-tab="' + tabId + '"], .launchpad-app[data-tab="' + tabId + '"]').forEach(el => el.classList.add('active'));
 
+  // Update browser URL
+  const urlBar = document.getElementById('browser-url') as HTMLInputElement;
+  if (urlBar) {
+    urlBar.value = 'idara.dev/resume/' + tabId;
+  }
+
   // Close launchpad if it's open when a tab is selected
   const launchpad = document.getElementById('launchpad-overlay');
   if (launchpad && launchpad.classList.contains('show')) {
@@ -375,6 +378,21 @@ labels.forEach(label => {
     if (tabId) switchTab(tabId);
   });
 });
+
+const launchpadBtn = document.getElementById('launchpad-btn');
+const launchpadOverlay = document.getElementById('launchpad-overlay');
+
+if (launchpadBtn && launchpadOverlay) {
+  launchpadBtn.addEventListener('click', () => {
+    launchpadOverlay.classList.toggle('show');
+  });
+
+  launchpadOverlay.addEventListener('click', (e) => {
+    if (e.target === launchpadOverlay) {
+      launchpadOverlay.classList.remove('show');
+    }
+  });
+}
 
 // Dropdown toggle logic
 const dropdownSelected = document.querySelector('.dropdown-selected');
@@ -622,7 +640,11 @@ function minimizeWindow(windowEl: Element | null, title: string) {
   const dockIcon = document.createElement('div');
   dockIcon.className = 'dock-icon';
   dockIcon.title = title;
-  dockIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>`;
+  if (windowEl === extBrowser) {
+    dockIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`;
+  } else {
+    dockIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>`;
+  }
   
   dockIcon.addEventListener('click', () => {
     windowEl.classList.remove('minimized');
