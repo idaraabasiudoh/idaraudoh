@@ -335,6 +335,13 @@ function switchTab(tabId: string) {
   if (launchpad && launchpad.classList.contains('show')) {
     launchpad.classList.remove('show');
   }
+
+  // Minimize external browser if it's currently open
+  const extOverlay = document.getElementById('external-overlay');
+  const extBrowser = document.querySelector('.external-window');
+  if (extOverlay && extOverlay.classList.contains('show') && !extOverlay.classList.contains('minimized-overlay')) {
+    minimizeWindow(extBrowser, "External Site");
+  }
 }
 
 labels.forEach(label => {
@@ -392,6 +399,9 @@ function openExternalOverlay(url: string) {
       openBtnEl.href = url;
       if (fallbackBtnEl) fallbackBtnEl.href = url;
       overlayEl.classList.add('show');
+      overlayEl.classList.remove('minimized-overlay');
+      const extWindow = document.querySelector('.external-window');
+      extWindow?.classList.remove('minimized');
       
       // Timeout to default to fallback UI if the website breaks or doesn't respond
       const fallbackUi = document.querySelector('.external-fallback-ui') as HTMLElement;

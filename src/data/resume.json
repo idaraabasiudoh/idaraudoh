@@ -8,6 +8,13 @@
         "Implemented role-based access control for M1 Hub Storage, validating user access via authentication tokens and permissions, and building a fail-safe UI logic using React and TypeScript, to handle network delays and invalid tokens.",
         "Extended the Desktop Storage Uploader by adding a user log download feature, implementing C#/.NET logic to collect, compress, and export application logs as JSON for end-users.",
         "Wrote tests to mock and verify functionality for M1 Hub Storage using Vitest and MSW, and .NET testing framework for the Desktop Storage Uploader to ensure reliability across edge cases."
+      ],
+      "links": [
+        {
+          "name": "Website",
+          "url": "https://magnetforensics.com",
+          "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
+        }
       ]
     },
     {
@@ -19,16 +26,13 @@
         "Used git workflows for team collaboration and GitHub Actions for automating build, test, and deployment pipelines.",
         "Participated in bi-weekly Q&A standups to assess internal and external product reviews and contribute to sprint planning.",
         "Received mentorship and practice on modern software architecture, design patterns, system design and HTTP."
-      ]
-    },
-    {
-      "title": "Software Developer Intern",
-      "company": "Wouessi Digital",
-      "bullets": [
-        "Contributed to the company portal using TypeScript, React, and Vue.js, integrating Supabase for authentication and PostgreSQL for data storage.",
-        "Assisted in prototyping a content recommendation system using TensorFlow and Spark, for user personalization strategies.",
-        "Helped build a Tender Discovery platform using MongoDB and AWS S3/Lambda, simplifying tender application workflows.",
-        "Collaborated on an internal Employee Management System with git access control and CI/CD setup using Docker."
+      ],
+      "links": [
+        {
+          "name": "Website",
+          "url": "https://keel.digital",
+          "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
+        }
       ]
     },
     {
@@ -42,6 +46,11 @@
       ],
       "links": [
         {
+          "name": "Website",
+          "url": "https://gropad.com",
+          "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
+        },
+        {
           "name": "App Store",
           "url": "https://apps.apple.com/app/gropad/id6752580542",
           "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
@@ -51,6 +60,16 @@
           "url": "https://play.google.com/store/apps/details?id=com.gropad.app&pcampaignid=web_share",
           "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
         }
+      ]
+    },
+    {
+      "title": "Software Developer Intern",
+      "company": "Wouessi Digital",
+      "bullets": [
+        "Contributed to the company portal using TypeScript, React, and Vue.js, integrating Supabase for authentication and PostgreSQL for data storage.",
+        "Assisted in prototyping a content recommendation system using TensorFlow and Spark, for user personalization strategies.",
+        "Helped build a Tender Discovery platform using MongoDB and AWS S3/Lambda, simplifying tender application workflows.",
+        "Collaborated on an internal Employee Management System with git access control and CI/CD setup using Docker."
       ]
     }
   ],
