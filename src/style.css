@@ -952,6 +952,12 @@ body {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+  /* Remove ugly blue highlight overlay on mobile tap */
+  a, button, select, input, textarea,
+  .dropdown-selected, .dock-icon, .mobile-menu-btn, .dropdown-item {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .main-content {
     min-height: calc(100vh - 140px);
   }
