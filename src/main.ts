@@ -50,13 +50,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </header>
     
     <main class="main-content">
-      
+      <!-- Window Empty Placeholder -->
+      <div class="main-placeholder idara-liquid-placeholder" id="main-placeholder">
+        Open a window to get started
+      </div>
 
       <!-- Browser Window Mockup -->
-      <div class="browser-window">
+      <div class="browser-window hidden">
         <div class="browser-header">
           <div class="window-controls">
-            <span class="control close disabled" id="main-close"></span>
+            <span class="control close" id="main-close" style="cursor: pointer;" title="Close Window"></span>
             <span class="control minimize" id="main-min" style="cursor: pointer;"></span>
             <span class="control maximize" id="main-max" style="cursor: pointer;"></span>
           </div>
@@ -320,8 +323,68 @@ populateData();
 
 
 // Interactive Logic
+const mainBrowser = document.querySelector('.browser-window:not(.external-window)');
+const extBrowser = document.querySelector('.external-window');
+const dock = document.getElementById('macos-dock');
+
 const labels = document.querySelectorAll('.dock-icon[data-tab], .launchpad-app[data-tab]');
 const sections = document.querySelectorAll('.section');
+
+// Update visibility of the empty window placeholder
+function updatePlaceholder() {
+  const placeholder = document.getElementById('main-placeholder');
+  const isMainVisible = mainBrowser && !mainBrowser.classList.contains('hidden') && !mainBrowser.classList.contains('minimized');
+  const isExtVisible = document.getElementById('external-overlay')?.classList.contains('show') && !document.getElementById('external-overlay')?.classList.contains('minimized-overlay') && !extBrowser?.classList.contains('minimized');
+  
+  if (placeholder) {
+    if (!isMainVisible && !isExtVisible) {
+      placeholder.classList.add('show');
+    } else {
+      placeholder.classList.remove('show');
+    }
+  }
+}
+
+// Close external browser completely (closing other things)
+function closeExternalBrowser() {
+  const overlayEl = document.getElementById('external-overlay');
+  const iframeEl = document.getElementById('external-iframe') as HTMLIFrameElement;
+  if (overlayEl) {
+    overlayEl.classList.remove('show');
+    overlayEl.classList.remove('minimized-overlay');
+  }
+  if (extBrowser) {
+    extBrowser.classList.remove('minimized');
+  }
+  if (iframeEl) {
+    iframeEl.src = '';
+  }
+  const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
+  if (extMinIcon) extMinIcon.remove();
+}
+
+// Close/Hide main resume browser
+function closeMainBrowser() {
+  if (mainBrowser) {
+    mainBrowser.classList.add('hidden');
+    mainBrowser.classList.remove('minimized');
+  }
+  document.querySelectorAll('.dock-icon').forEach(item => item.classList.remove('active'));
+  document.querySelectorAll('.launchpad-app').forEach(item => item.classList.remove('active'));
+  
+  const mainMinIcon = document.querySelector(`.dock-icon[title="Idara's Resume"]`);
+  if (mainMinIcon) mainMinIcon.remove();
+}
+
+// Open/Show main resume browser
+function openMainBrowser() {
+  if (mainBrowser) {
+    mainBrowser.classList.remove('hidden');
+    mainBrowser.classList.remove('minimized');
+  }
+  const mainMinIcon = document.querySelector(`.dock-icon[title="Idara's Resume"]`);
+  if (mainMinIcon) mainMinIcon.remove();
+}
 
 function switchTab(tabId: string) {
   sections.forEach(s => s.classList.remove('active'));
@@ -345,12 +408,14 @@ function switchTab(tabId: string) {
     launchpad.classList.remove('show');
   }
 
-  // Minimize external browser if it's currently open
-  const extOverlay = document.getElementById('external-overlay');
-  const extBrowser = document.querySelector('.external-window');
-  if (extOverlay && extOverlay.classList.contains('show') && !extOverlay.classList.contains('minimized-overlay')) {
-    minimizeWindow(extBrowser, "External Site");
-  }
+  // Close all other open windows (external browser)
+  closeExternalBrowser();
+
+  // Show/Open main resume browser
+  openMainBrowser();
+
+  // Update placeholder visibility
+  updatePlaceholder();
 }
 
 labels.forEach(label => {
@@ -399,6 +464,9 @@ function openExternalOverlay(url: string) {
     const fallbackBtnEl = document.getElementById('external-open-btn-fallback') as HTMLAnchorElement;
 
     if (overlayEl && iframeEl && urlBarEl && openBtnEl) {
+      // Close the main resume browser to satisfy "closing all other open things"
+      closeMainBrowser();
+
       iframeEl.style.display = 'block';
       iframeEl.src = url;
       
@@ -411,6 +479,12 @@ function openExternalOverlay(url: string) {
       overlayEl.classList.remove('minimized-overlay');
       const extWindow = document.querySelector('.external-window');
       extWindow?.classList.remove('minimized');
+
+      // Clean up minimized icon if any
+      const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
+      if (extMinIcon) extMinIcon.remove();
+
+      updatePlaceholder();
       
       // Timeout to default to fallback UI if the website breaks or doesn't respond
       const fallbackUi = document.querySelector('.external-fallback-ui') as HTMLElement;
@@ -585,8 +659,13 @@ externalLinks.forEach(link => {
 if (closeBtn && overlay && iframe) {
   closeBtn.addEventListener('click', () => {
     overlay.classList.remove('show');
+    overlay.classList.remove('minimized-overlay');
+    if (extBrowser) extBrowser.classList.remove('minimized');
+    const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
+    if (extMinIcon) extMinIcon.remove();
     setTimeout(() => {
       iframe.src = '';
+      updatePlaceholder();
     }, 300); // clear after transition
   });
 }
@@ -596,21 +675,22 @@ if (overlay) {
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay && !extBrowser?.classList.contains('minimized')) {
       overlay.classList.remove('show');
+      overlay.classList.remove('minimized-overlay');
+      const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
+      if (extMinIcon) extMinIcon.remove();
       setTimeout(() => {
         if (iframe) iframe.src = '';
+        updatePlaceholder();
       }, 300);
     }
   });
 }
 
 // Window Controls Logic
-const mainBrowser = document.querySelector('.browser-window:not(.external-window)');
-const extBrowser = document.querySelector('.external-window');
 const mainMin = document.getElementById('main-min');
 const mainMax = document.getElementById('main-max');
 const extMin = document.getElementById('external-min');
 const extMax = document.getElementById('external-max');
-const dock = document.getElementById('macos-dock');
 
 // Maximize
 mainMax?.addEventListener('click', () => {
@@ -628,6 +708,7 @@ function minimizeWindow(windowEl: Element | null, title: string) {
      const overlayEl = document.getElementById('external-overlay');
      overlayEl?.classList.add('minimized-overlay');
      windowEl.classList.add('minimized');
+     updatePlaceholder();
      return;
   }
   
@@ -647,17 +728,28 @@ function minimizeWindow(windowEl: Element | null, title: string) {
     if (windowEl === extBrowser) {
       const overlayEl = document.getElementById('external-overlay');
       overlayEl?.classList.remove('minimized-overlay');
+    } else {
+      windowEl.classList.remove('hidden');
     }
     dockIcon.remove();
-    if (dock.children.length === 0) dock.classList.remove('show');
+    updatePlaceholder();
   });
   
   dock.appendChild(dockIcon);
-  dock.classList.add('show');
+  updatePlaceholder();
 }
 
 mainMin?.addEventListener('click', () => minimizeWindow(mainBrowser, "Idara's Resume"));
 extMin?.addEventListener('click', () => minimizeWindow(extBrowser, "External Site"));
+
+// Main Browser Close Button
+const mainClose = document.getElementById('main-close');
+if (mainClose) {
+  mainClose.addEventListener('click', () => {
+    closeMainBrowser();
+    updatePlaceholder();
+  });
+}
 
 const browserAppBtn = document.getElementById('browser-app-btn');
 if (browserAppBtn) {
@@ -665,11 +757,16 @@ if (browserAppBtn) {
     const overlayEl = document.getElementById('external-overlay');
     const iframeEl = document.getElementById('external-iframe') as HTMLIFrameElement;
     if (overlayEl) {
+      // Close all other open windows (main resume browser)
+      closeMainBrowser();
+
       overlayEl.classList.remove('minimized-overlay');
       overlayEl.classList.add('show');
       
-      const extBrowser = document.querySelector('.external-window');
-      extBrowser?.classList.remove('minimized');
+      if (extBrowser) extBrowser.classList.remove('minimized');
+      
+      const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
+      if (extMinIcon) extMinIcon.remove();
       
       if (!iframeEl || !iframeEl.src || iframeEl.src === window.location.href || iframeEl.src === 'about:blank') {
         const fallbackUi = document.querySelector('.external-fallback-ui') as HTMLElement;
@@ -683,6 +780,8 @@ if (browserAppBtn) {
           if (btn) btn.style.display = 'none';
         }
       }
+
+      updatePlaceholder();
     }
   });
 }
@@ -704,5 +803,5 @@ if (mobileMenuBtn && headerContactsMenu) {
   });
 }
 
-// Initialize default tab on load
-switchTab('experience');
+// On load, update the placeholder so it shows up since no browser window is open by default
+updatePlaceholder();
