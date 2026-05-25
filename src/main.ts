@@ -21,11 +21,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </header>
     
     <main class="main-content">
-      <!-- Floating Labels -->
-      <div class="floating-label tl interactive" data-tab="experience">Experience</div>
-      <div class="floating-label tr interactive" data-tab="projects">Projects</div>
-      <div class="floating-label bl interactive" data-tab="skills">Skills</div>
-      <div class="floating-label br interactive" data-tab="education">Education</div>
+      
 
       <!-- Browser Window Mockup -->
       <div class="browser-window">
@@ -38,35 +34,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <div class="url-bar-container">
             <input type="text" class="browser-url-bar browser-url-input" id="browser-url" value="idara.dev/resume/experience" spellcheck="false" autocomplete="off" />
             <div class="url-icons state-refresh" id="main-url-icons">
-              <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"></path><path d="M3 12a9 9 0 1 0 2.61-6.3L21 8"></path></svg>
+              <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
               <svg class="icon-send" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
               <svg class="icon-loading" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
             </div>
           </div>
-          <div class="browser-actions">
-               <a href="https://github.com/idaraabasiudoh" target="_blank" class="header-icon">
-                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-               </a>
-          </div>
+          <div class="browser-actions"></div>
         </div>
         <div class="browser-content">
           <div class="browser-title-area">
             <div class="browser-logo">Idara Udoh</div>
-            <div class="dropdown-container">
-              <div class="dropdown-selected">
-                <span id="current-group">Resume</span> 
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </div>
-              <div class="dropdown-menu">
-                <div class="dropdown-group">
-                  <div class="dropdown-group-title">Resume</div>
-                  <div class="dropdown-item active" data-tab="experience">Experience</div>
-                  <div class="dropdown-item" data-tab="projects">Projects</div>
-                  <div class="dropdown-item" data-tab="skills">Skills</div>
-                  <div class="dropdown-item" data-tab="education">Education</div>
-                </div>
-              </div>
-            </div>
           </div>
           
           <div class="content-sections">
@@ -277,7 +254,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <div class="url-bar-container">
           <input type="text" class="browser-url-bar browser-url-input" id="external-url" spellcheck="false" autocomplete="off" />
           <div class="url-icons state-refresh" id="external-url-icons">
-            <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"></path><path d="M3 12a9 9 0 1 0 2.61-6.3L21 8"></path></svg>
+            <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
             <svg class="icon-send" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             <svg class="icon-loading" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
           </div>
@@ -303,38 +280,92 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 
   <!-- macOS Dock -->
-  <div class="macos-dock" id="macos-dock"></div>
+    <!-- macOS Dock -->
+  <div class="macos-dock show" id="macos-dock">
+    <div class="dock-item">
+      <div class="dock-icon interactive" id="launchpad-btn" title="Launchpad">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="14" width="7" height="7" rx="2"></rect><rect x="3" y="14" width="7" height="7" rx="2"></rect></svg>
+      </div>
+      <span class="dock-tooltip">Launchpad</span>
+    </div>
+    
+    <div class="dock-divider"></div>
+
+    <div class="dock-item">
+      <div class="dock-icon interactive" data-tab="experience" title="Experience">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+      </div>
+      <span class="dock-tooltip">Experience</span>
+    </div>
+    <div class="dock-item">
+      <div class="dock-icon interactive" data-tab="projects" title="Projects">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+      </div>
+      <span class="dock-tooltip">Projects</span>
+    </div>
+    <div class="dock-item">
+      <div class="dock-icon interactive" data-tab="skills" title="Skills">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      </div>
+      <span class="dock-tooltip">Skills</span>
+    </div>
+    <div class="dock-item">
+      <div class="dock-icon interactive" data-tab="education" title="Education">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+      </div>
+      <span class="dock-tooltip">Education</span>
+    </div>
+  </div>
+
+  <!-- Launchpad Overlay -->
+  <div class="launchpad-overlay" id="launchpad-overlay">
+    <div class="launchpad-search">
+      <input type="text" placeholder="Search" spellcheck="false" autocomplete="off" />
+    </div>
+    <div class="launchpad-container">
+      <div class="launchpad-group">
+        <h3>Resume</h3>
+        <div class="launchpad-grid">
+          <div class="launchpad-app interactive" data-tab="experience">
+            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+            <span>Experience</span>
+          </div>
+          <div class="launchpad-app interactive" data-tab="projects">
+            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+            <span>Projects</span>
+          </div>
+          <div class="launchpad-app interactive" data-tab="skills">
+            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            <span>Skills</span>
+          </div>
+          <div class="launchpad-app interactive" data-tab="education">
+            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
+            <span>Education</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 `
 
 // Interactive Logic
-const labels = document.querySelectorAll('.floating-label, .dropdown-item');
+const labels = document.querySelectorAll('.dock-icon[data-tab], .launchpad-app[data-tab]');
 const sections = document.querySelectorAll('.section');
 
 function switchTab(tabId: string) {
   sections.forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.dropdown-item').forEach(item => item.classList.remove('active'));
-  document.querySelectorAll('.floating-label').forEach(fl => fl.classList.remove('active'));
+  document.querySelectorAll('.dock-icon').forEach(item => item.classList.remove('active'));
+  document.querySelectorAll('.launchpad-app').forEach(item => item.classList.remove('active'));
   
   const targetSection = document.getElementById(tabId);
   if (targetSection) targetSection.classList.add('active');
   
-  const targetDropdown = document.querySelector(`.dropdown-item[data-tab="${tabId}"]`);
-  if (targetDropdown) {
-    targetDropdown.classList.add('active');
-    const groupTitle = targetDropdown.closest('.dropdown-group')?.querySelector('.dropdown-group-title')?.textContent;
-    const groupSpan = document.getElementById('current-group');
-    if (groupSpan && groupTitle) {
-      groupSpan.textContent = groupTitle;
-    }
-  }
+  document.querySelectorAll('.dock-icon[data-tab="' + tabId + '"], .launchpad-app[data-tab="' + tabId + '"]').forEach(el => el.classList.add('active'));
 
-  // Sync floating labels if they exist
-  document.querySelectorAll(`.floating-label[data-tab="${tabId}"]`).forEach(el => el.classList.add('active'));
-  
-  // update URL
-  const urlBar = document.getElementById('browser-url') as HTMLInputElement;
-  if (urlBar && tabId !== 'error-404') {
-    urlBar.value = `idara.dev/resume/${tabId}`;
+  // Close launchpad if it's open when a tab is selected
+  const launchpad = document.getElementById('launchpad-overlay');
+  if (launchpad && launchpad.classList.contains('show')) {
+    launchpad.classList.remove('show');
   }
 }
 
@@ -369,13 +400,45 @@ function openExternalOverlay(url: string) {
     const fallbackBtnEl = document.getElementById('external-open-btn-fallback') as HTMLAnchorElement;
 
     if (overlayEl && iframeEl && urlBarEl && openBtnEl) {
+      iframeEl.style.display = 'block';
       iframeEl.src = url;
+      
       let displayUrl = url.replace('https://', '').replace('http://', '');
       if (displayUrl.endsWith('/')) displayUrl = displayUrl.slice(0, -1);
       urlBarEl.value = displayUrl;
       openBtnEl.href = url;
       if (fallbackBtnEl) fallbackBtnEl.href = url;
       overlayEl.classList.add('show');
+      
+      // Timeout to default to fallback UI if the website breaks or doesn't respond
+      const fallbackUi = document.querySelector('.external-fallback-ui') as HTMLElement;
+      if (fallbackUi) {
+        const h2 = fallbackUi.querySelector('h2');
+        if (h2) h2.textContent = 'Loading External Site...';
+      }
+
+      if ((window as any).fallbackTimeout) clearTimeout((window as any).fallbackTimeout);
+      
+      (window as any).fallbackTimeout = setTimeout(() => {
+         iframeEl.style.display = 'none';
+         if (fallbackUi) {
+           const h2 = fallbackUi.querySelector('h2');
+           if (h2) h2.textContent = 'Website not responding';
+         }
+      }, 6000);
+
+      iframeEl.onload = () => {
+         clearTimeout((window as any).fallbackTimeout);
+      };
+
+      iframeEl.onerror = () => {
+         clearTimeout((window as any).fallbackTimeout);
+         iframeEl.style.display = 'none';
+         if (fallbackUi) {
+           const h2 = fallbackUi.querySelector('h2');
+           if (h2) h2.textContent = 'Website broke or refused to connect';
+         }
+      };
     }
 }
 
