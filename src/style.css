@@ -78,8 +78,8 @@ body {
     padding: 0 30px;
   }
   .logo {
-    font-size: 13px;
-    line-height: 1.3;
+    font-size: 11px;
+    line-height: 1.2;
   }
 }
 
@@ -1254,6 +1254,69 @@ body {
     font-size: 18px;
     letter-spacing: -0.3px;
     margin-bottom: 80px;
+  }
+  .music-window {
+    left: 50%;
+    right: auto;
+    top: 88px;
+    bottom: auto;
+    width: min(340px, calc(100vw - 28px));
+    transform: translateX(-50%);
+    border-radius: 18px;
+  }
+  .music-header {
+    display: none;
+  }
+  .music-window.hidden,
+  .music-window.minimized {
+    transform: translateX(-50%) translateY(28px) scale(0.92);
+  }
+  .music-window.expanded {
+    width: min(340px, calc(100vw - 28px));
+  }
+  .music-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 10px;
+  }
+  .music-art {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    flex: 0 0 auto;
+  }
+  .music-art svg {
+    width: 21px;
+    height: 21px;
+  }
+  .music-meta {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .music-label {
+    display: none;
+  }
+  .music-title {
+    font-size: 12px;
+  }
+  .music-controls {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 6px;
+    margin-top: 0;
+  }
+  .music-control-btn {
+    width: 30px;
+    height: 30px;
+  }
+  .music-play-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .music-control-btn svg {
+    width: 14px;
+    height: 14px;
   }
 }
 

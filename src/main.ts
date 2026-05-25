@@ -901,6 +901,7 @@ let musicDragOffsetY = 0;
 
 musicHeader?.addEventListener('pointerdown', (event: PointerEvent) => {
   const target = event.target as HTMLElement;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
   if (target.closest('.window-controls')) return;
   if (!(musicWindow instanceof HTMLElement)) return;
 
