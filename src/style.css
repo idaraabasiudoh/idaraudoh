@@ -34,7 +34,7 @@
 }
 
 body {
-  background: linear-gradient(-45deg, #ffffff, #f5f5f5, #e0e0e0, #f8f8f8);
+  background: linear-gradient(-45deg, #ffffff, #d4e4f7, #fff8d6, #eaeaea);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   color: var(--text-primary);
@@ -829,7 +829,7 @@ body {
   .browser-url-bar {
     max-width: 140px;
     font-size: 10px;
-    padding: 0 5px;
+    padding: 0 26px;
   }
   .contact-link {
     padding: 8px 12px;
@@ -841,6 +841,24 @@ body {
   .dropdown-group-title, .dropdown-item {
     font-size: 12px;
     padding: 6px 10px;
+  }
+  .external-fallback-ui h2 {
+    font-size: 20px;
+    text-align: center;
+    padding: 0 15px;
+  }
+  .external-fallback-ui p {
+    font-size: 12px;
+    padding: 0 15px;
+  }
+  .fallback-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 15px;
+  }
+  .liquid-button {
+    font-size: 12px;
+    padding: 10px 20px;
   }
 }
 

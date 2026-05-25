@@ -437,6 +437,23 @@ function openExternalOverlay(url: string) {
 
       if ((window as any).fallbackTimeout) clearTimeout((window as any).fallbackTimeout);
       
+      try {
+        const urlObj = new URL(url);
+        const strictDomains = ['linkedin.com', 'github.com', 'twitter.com', 'x.com', 'google.com', 'facebook.com', 'instagram.com', 'apple.com'];
+        const isStrict = strictDomains.some(domain => urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain));
+        
+        if (isStrict) {
+          iframeEl.style.display = 'none';
+          if (fallbackUi) {
+            const h2 = fallbackUi.querySelector('h2');
+            if (h2) h2.textContent = `${urlObj.hostname} refused to connect`;
+          }
+          return;
+        }
+      } catch (e) {
+        // Ignore invalid URLs
+      }
+      
       (window as any).fallbackTimeout = setTimeout(() => {
          iframeEl.style.display = 'none';
          if (fallbackUi) {
