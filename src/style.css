@@ -826,8 +826,11 @@ body {
   .browser-header {
     padding: 0 10px;
   }
-  .browser-url-bar {
+  .url-bar-container {
     max-width: 140px;
+    width: 60%;
+  }
+  .browser-url-bar {
     font-size: 10px;
     padding: 0 26px;
   }

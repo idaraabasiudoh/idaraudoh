@@ -315,6 +315,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
       <span class="dock-tooltip">Education</span>
     </div>
+    
+    <div class="dock-divider"></div>
+    
+    <div class="dock-item">
+      <div class="dock-icon interactive" id="browser-app-btn" title="Web Browser">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      </div>
+      <span class="dock-tooltip">Web Browser</span>
+    </div>
   </div>
 
   <!-- Launchpad Overlay -->
@@ -432,7 +441,11 @@ function openExternalOverlay(url: string) {
       const fallbackUi = document.querySelector('.external-fallback-ui') as HTMLElement;
       if (fallbackUi) {
         const h2 = fallbackUi.querySelector('h2');
+        const p = fallbackUi.querySelector('p');
+        const btn = fallbackUi.querySelector('.liquid-button') as HTMLElement;
         if (h2) h2.textContent = 'Loading External Site...';
+        if (p) p.innerHTML = 'If the site refuses to connect due to security policies,<br/>please use the button below to open it directly.';
+        if (btn) btn.style.display = 'inline-block';
       }
 
       if ((window as any).fallbackTimeout) clearTimeout((window as any).fallbackTimeout);
@@ -679,3 +692,34 @@ function minimizeWindow(windowEl: Element | null, title: string) {
 
 mainMin?.addEventListener('click', () => minimizeWindow(mainBrowser, "Idara's Resume"));
 extMin?.addEventListener('click', () => minimizeWindow(extBrowser, "External Site"));
+
+const browserAppBtn = document.getElementById('browser-app-btn');
+if (browserAppBtn) {
+  browserAppBtn.addEventListener('click', () => {
+    const overlayEl = document.getElementById('external-overlay');
+    const iframeEl = document.getElementById('external-iframe') as HTMLIFrameElement;
+    if (overlayEl) {
+      overlayEl.classList.remove('minimized-overlay');
+      overlayEl.classList.add('show');
+      
+      const extBrowser = document.querySelector('.external-window');
+      extBrowser?.classList.remove('minimized');
+      
+      if (!iframeEl || !iframeEl.src || iframeEl.src === window.location.href || iframeEl.src === 'about:blank') {
+        const fallbackUi = document.querySelector('.external-fallback-ui') as HTMLElement;
+        if (fallbackUi) {
+          iframeEl.style.display = 'none';
+          const h2 = fallbackUi.querySelector('h2');
+          const p = fallbackUi.querySelector('p');
+          const btn = fallbackUi.querySelector('.liquid-button') as HTMLElement;
+          if (h2) h2.textContent = 'Ready to Browse';
+          if (p) p.innerHTML = 'Enter a URL in the address bar above to load a website.';
+          if (btn) btn.style.display = 'none';
+        }
+      }
+    }
+  });
+}
+
+// Initialize default tab on load
+switchTab('experience');
