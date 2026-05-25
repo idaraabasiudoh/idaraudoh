@@ -389,6 +389,7 @@ const mainBrowser = document.querySelector('.browser-window:not(.external-window
 const extBrowser = document.querySelector('.external-window');
 const dock = document.getElementById('macos-dock');
 const musicWindow = document.getElementById('music-window');
+const musicHeader = document.querySelector<HTMLElement>('.music-header');
 
 const labels = document.querySelectorAll('.dock-icon[data-tab], .launchpad-app[data-tab]');
 const sections = document.querySelectorAll('.section');
@@ -893,6 +894,50 @@ musicAudio?.addEventListener('ended', () => {
 });
 
 loadTrack(0);
+
+let isDraggingMusic = false;
+let musicDragOffsetX = 0;
+let musicDragOffsetY = 0;
+
+musicHeader?.addEventListener('pointerdown', (event: PointerEvent) => {
+  const target = event.target as HTMLElement;
+  if (target.closest('.window-controls')) return;
+  if (!(musicWindow instanceof HTMLElement)) return;
+
+  const rect = musicWindow.getBoundingClientRect();
+  isDraggingMusic = true;
+  musicDragOffsetX = event.clientX - rect.left;
+  musicDragOffsetY = event.clientY - rect.top;
+  musicWindow.classList.add('dragging');
+  musicWindow.style.left = `${rect.left}px`;
+  musicWindow.style.top = `${rect.top}px`;
+  musicWindow.style.right = 'auto';
+  musicWindow.style.bottom = 'auto';
+  musicWindow.setPointerCapture(event.pointerId);
+});
+
+musicWindow?.addEventListener('pointermove', (event: PointerEvent) => {
+  if (!isDraggingMusic || !(musicWindow instanceof HTMLElement)) return;
+
+  const maxLeft = window.innerWidth - musicWindow.offsetWidth;
+  const maxTop = window.innerHeight - musicWindow.offsetHeight;
+  const nextLeft = Math.min(Math.max(0, event.clientX - musicDragOffsetX), Math.max(0, maxLeft));
+  const nextTop = Math.min(Math.max(0, event.clientY - musicDragOffsetY), Math.max(0, maxTop));
+  musicWindow.style.left = `${nextLeft}px`;
+  musicWindow.style.top = `${nextTop}px`;
+});
+
+function stopDraggingMusic(event?: PointerEvent) {
+  if (!isDraggingMusic || !(musicWindow instanceof HTMLElement)) return;
+  isDraggingMusic = false;
+  musicWindow.classList.remove('dragging');
+  if (event) {
+    musicWindow.releasePointerCapture(event.pointerId);
+  }
+}
+
+musicWindow?.addEventListener('pointerup', stopDraggingMusic);
+musicWindow?.addEventListener('pointercancel', stopDraggingMusic);
 
 // Main Browser Close Button
 const mainClose = document.getElementById('main-close');
