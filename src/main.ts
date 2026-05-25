@@ -157,7 +157,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <!-- macOS Dock -->
   <div class="macos-dock show" id="macos-dock">
     <div class="dock-item">
-      <div class="dock-icon interactive" id="launchpad-btn" title="Launchpad">
+      <div class="dock-icon interactive icon-launchpad" id="launchpad-btn" title="Launchpad">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="3" width="7" height="7" rx="2"></rect><rect x="14" y="14" width="7" height="7" rx="2"></rect><rect x="3" y="14" width="7" height="7" rx="2"></rect></svg>
       </div>
       <span class="dock-tooltip">Launchpad</span>
@@ -166,25 +166,25 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="dock-divider"></div>
 
     <div class="dock-item">
-      <div class="dock-icon interactive" data-tab="experience" title="Experience">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+      <div class="dock-icon interactive icon-experience" data-tab="experience" title="Experience">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
       </div>
       <span class="dock-tooltip">Experience</span>
     </div>
     <div class="dock-item">
-      <div class="dock-icon interactive" data-tab="projects" title="Projects">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+      <div class="dock-icon interactive icon-projects" data-tab="projects" title="Projects">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4H2v16h20V6H12l-2-2z"></path><polyline points="10 13 8 15 10 17"></polyline><polyline points="14 13 16 15 14 17"></polyline></svg>
       </div>
       <span class="dock-tooltip">Projects</span>
     </div>
     <div class="dock-item">
-      <div class="dock-icon interactive" data-tab="skills" title="Skills">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      <div class="dock-icon interactive icon-skills" data-tab="skills" title="Skills">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="14" y1="4" x2="10" y2="20"></line></svg>
       </div>
       <span class="dock-tooltip">Skills</span>
     </div>
     <div class="dock-item">
-      <div class="dock-icon interactive" data-tab="education" title="Education">
+      <div class="dock-icon interactive icon-education" data-tab="education" title="Education">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
       </div>
       <span class="dock-tooltip">Education</span>
@@ -193,7 +193,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="dock-divider"></div>
     
     <div class="dock-item">
-      <div class="dock-icon interactive" id="browser-app-btn" title="Web Browser">
+      <div class="dock-icon interactive icon-browser" id="browser-app-btn" title="Web Browser">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
       </div>
       <span class="dock-tooltip">Web Browser</span>
@@ -207,20 +207,29 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <h3>Resume</h3>
         <div class="launchpad-grid">
           <div class="launchpad-app interactive" data-tab="experience">
-            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+            <div class="app-icon icon-experience"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
             <span>Experience</span>
           </div>
           <div class="launchpad-app interactive" data-tab="projects">
-            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+            <div class="app-icon icon-projects"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4H2v16h20V6H12l-2-2z"></path><polyline points="10 13 8 15 10 17"></polyline><polyline points="14 13 16 15 14 17"></polyline></svg></div>
             <span>Projects</span>
           </div>
           <div class="launchpad-app interactive" data-tab="skills">
-            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            <div class="app-icon icon-skills"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="14" y1="4" x2="10" y2="20"></line></svg></div>
             <span>Skills</span>
           </div>
           <div class="launchpad-app interactive" data-tab="education">
-            <div class="app-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
+            <div class="app-icon icon-education"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
             <span>Education</span>
+          </div>
+        </div>
+      </div>
+      <div class="launchpad-group">
+        <h3>Apps</h3>
+        <div class="launchpad-grid">
+          <div class="launchpad-app interactive browser-app-trigger">
+            <div class="app-icon icon-browser"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+            <span>Browser</span>
           </div>
         </div>
       </div>
@@ -751,14 +760,16 @@ if (mainClose) {
   });
 }
 
-const browserAppBtn = document.getElementById('browser-app-btn');
-if (browserAppBtn) {
+const browserAppBtns = document.querySelectorAll('#browser-app-btn, .browser-app-trigger');
+browserAppBtns.forEach(browserAppBtn => {
   browserAppBtn.addEventListener('click', () => {
     const overlayEl = document.getElementById('external-overlay');
     const iframeEl = document.getElementById('external-iframe') as HTMLIFrameElement;
+    const launchpad = document.getElementById('launchpad-overlay');
     if (overlayEl) {
       // Close all other open windows (main resume browser)
       closeMainBrowser();
+      launchpad?.classList.remove('show');
 
       overlayEl.classList.remove('minimized-overlay');
       overlayEl.classList.add('show');
@@ -784,7 +795,7 @@ if (browserAppBtn) {
       updatePlaceholder();
     }
   });
-}
+});
 
 // Header Mobile Dropdown Logic
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');

@@ -950,6 +950,53 @@ body {
   margin: 0 8px;
 }
 
+.dock-icon svg,
+.app-icon svg {
+  stroke: currentColor;
+}
+
+.dock-icon.icon-launchpad,
+.app-icon.icon-launchpad {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(168, 85, 247, 0.24));
+  border-color: rgba(99, 102, 241, 0.24);
+  color: #4f46e5;
+}
+
+.dock-icon.icon-experience,
+.app-icon.icon-experience {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(251, 191, 36, 0.26));
+  border-color: rgba(245, 158, 11, 0.24);
+  color: #b45309;
+}
+
+.dock-icon.icon-projects,
+.app-icon.icon-projects {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(14, 165, 233, 0.26));
+  border-color: rgba(59, 130, 246, 0.24);
+  color: #2563eb;
+}
+
+.dock-icon.icon-skills,
+.app-icon.icon-skills {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(45, 212, 191, 0.26));
+  border-color: rgba(16, 185, 129, 0.24);
+  color: #059669;
+}
+
+.dock-icon.icon-education,
+.app-icon.icon-education {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(217, 70, 239, 0.24));
+  border-color: rgba(139, 92, 246, 0.24);
+  color: #7c3aed;
+}
+
+.dock-icon.icon-browser,
+.app-icon.icon-browser {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(34, 197, 94, 0.22));
+  border-color: rgba(14, 165, 233, 0.24);
+  color: #0284c7;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   /* Remove ugly blue highlight overlay on mobile tap */
@@ -1164,14 +1211,15 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  background: rgba(15, 23, 42, 0.38);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
   z-index: 3000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  justify-content: center;
+  padding: 40px 24px 120px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -1208,69 +1256,112 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 34px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 720px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 32px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .launchpad-group {
   width: 100%;
-  margin-bottom: 40px;
 }
 
 .launchpad-group h3 {
   color: #fff;
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
   text-align: center;
+  letter-spacing: -0.2px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .launchpad-grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(84px, 1fr));
+  justify-items: center;
+  gap: 28px 24px;
+  width: 100%;
 }
 
 .launchpad-app {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 84px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
 .launchpad-app:hover {
-  transform: scale(1.1);
+  transform: translateY(-4px) scale(1.04);
 }
 
 .launchpad-app.active .app-icon {
-  background: rgba(255, 255, 255, 0.8);
-  color: var(--text-primary);
-  box-shadow: 0 0 20px rgba(255,255,255,0.5);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.65), 0 16px 34px rgba(15, 23, 42, 0.22);
 }
 
 .launchpad-app .app-icon {
-  width: 80px;
-  height: 80px;
+  width: 58px;
+  height: 58px;
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
+  border-radius: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
-  margin-bottom: 8px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14), inset 0 1px 0 rgba(255,255,255,0.35);
   transition: all 0.2s ease;
+}
+
+.launchpad-app .app-icon svg {
+  width: 25px;
+  height: 25px;
 }
 
 .launchpad-app span {
   color: #fff;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.launchpad-app .app-icon.icon-experience {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(251, 191, 36, 0.26));
+  border-color: rgba(245, 158, 11, 0.24);
+  color: #b45309;
+}
+
+.launchpad-app .app-icon.icon-projects {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(14, 165, 233, 0.26));
+  border-color: rgba(59, 130, 246, 0.24);
+  color: #2563eb;
+}
+
+.launchpad-app .app-icon.icon-skills {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(45, 212, 191, 0.26));
+  border-color: rgba(16, 185, 129, 0.24);
+  color: #059669;
+}
+
+.launchpad-app .app-icon.icon-education {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(217, 70, 239, 0.24));
+  border-color: rgba(139, 92, 246, 0.24);
+  color: #7c3aed;
+}
+
+.launchpad-app .app-icon.icon-browser {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(34, 197, 94, 0.22));
+  border-color: rgba(14, 165, 233, 0.24);
+  color: #0284c7;
 }
 
 /* Updated Dock items */
