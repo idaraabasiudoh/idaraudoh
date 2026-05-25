@@ -35,7 +35,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             <span class="control minimize" id="main-min" style="cursor: pointer;"></span>
             <span class="control maximize" id="main-max" style="cursor: pointer;"></span>
           </div>
-          <input type="text" class="browser-url-bar browser-url-input" id="browser-url" value="idara.dev/resume/experience" spellcheck="false" autocomplete="off" />
+          <div class="url-bar-container">
+            <input type="text" class="browser-url-bar browser-url-input" id="browser-url" value="idara.dev/resume/experience" spellcheck="false" autocomplete="off" />
+            <div class="url-icons state-refresh" id="main-url-icons">
+              <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"></path><path d="M3 12a9 9 0 1 0 2.61-6.3L21 8"></path></svg>
+              <svg class="icon-send" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <svg class="icon-loading" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+            </div>
+          </div>
           <div class="browser-actions">
                <a href="https://github.com/idaraabasiudoh" target="_blank" class="header-icon">
                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
@@ -267,7 +274,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <span class="control minimize" id="external-min" style="cursor: pointer;"></span>
           <span class="control maximize" id="external-max" style="cursor: pointer;"></span>
         </div>
-        <input type="text" class="browser-url-bar browser-url-input" id="external-url" spellcheck="false" autocomplete="off" />
+        <div class="url-bar-container">
+          <input type="text" class="browser-url-bar browser-url-input" id="external-url" spellcheck="false" autocomplete="off" />
+          <div class="url-icons state-refresh" id="external-url-icons">
+            <svg class="icon-refresh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"></path><path d="M3 12a9 9 0 1 0 2.61-6.3L21 8"></path></svg>
+            <svg class="icon-send" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#007aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <svg class="icon-loading" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+          </div>
+        </div>
         <div class="browser-actions">
           <a href="#" target="_blank" id="external-open-btn" class="header-icon" title="Open in external page">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -275,15 +289,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         </div>
       </div>
       <div class="browser-content" style="padding: 0; position: relative; overflow: hidden; flex: 1;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text-secondary); z-index: 0; padding: 20px; width: 100%; pointer-events: none;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px; opacity: 0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
-          <p>Loading external site...</p>
-          <p style="font-size: 12px; margin-top: 5px; margin-bottom: 15px; opacity: 0.7;">If the site refuses to connect (due to security policies),<br/>please use the button below or in the menu bar.</p>
-          <a href="#" target="_blank" id="external-open-btn-fallback" style="display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: var(--text-primary); text-decoration: none; font-size: 13px; transition: all 0.2s; pointer-events: auto;">
+        <div class="external-fallback-ui">
+          <svg class="fallback-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+          <h2>Loading External Site...</h2>
+          <p>If the site refuses to connect due to security policies,<br/>please use the button below to open it directly.</p>
+          <a href="#" target="_blank" id="external-open-btn-fallback" class="liquid-button">
             Open External Link
           </a>
         </div>
-        <iframe id="external-iframe" src="" frameborder="0" width="100%" height="100%" style="position: relative; z-index: 1; background: transparent; display: block; pointer-events: auto; opacity: 0.99;"></iframe>
+        <iframe id="external-iframe" src="" frameborder="0" width="100%" height="100%" style="position: relative; z-index: 1; background: transparent; display: block; opacity: 0.99;"></iframe>
       </div>
     </div>
   </div>
@@ -405,16 +419,68 @@ const processUrlInput = (url: string, isExternal: boolean) => {
 };
 
   const mainUrlInput = document.getElementById('browser-url') as HTMLInputElement;
+  const mainUrlIcons = document.getElementById('main-url-icons');
+  
+  function setUrlState(iconsEl: HTMLElement | null, state: 'refresh' | 'send' | 'loading') {
+    if (!iconsEl) return;
+    iconsEl.className = `url-icons state-${state}`;
+  }
+
+  function handleUrlSubmit(url: string, isExternal: boolean, inputEl: HTMLInputElement, iconsEl: HTMLElement | null) {
+    if (!url.trim()) return;
+    setUrlState(iconsEl, 'loading');
+    setTimeout(() => {
+      processUrlInput(url, isExternal);
+      setUrlState(iconsEl, 'refresh');
+      inputEl.blur();
+    }, 500); // Dummy loading spin
+  }
+
   if (mainUrlInput) {
+    mainUrlInput.addEventListener('focus', () => setUrlState(mainUrlIcons, 'send'));
+    mainUrlInput.addEventListener('input', () => setUrlState(mainUrlIcons, 'send'));
+    mainUrlInput.addEventListener('blur', () => {
+      if (!mainUrlIcons?.classList.contains('state-loading')) {
+        setUrlState(mainUrlIcons, 'refresh');
+      }
+    });
     mainUrlInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') processUrlInput(mainUrlInput.value, false);
+      if (e.key === 'Enter') handleUrlSubmit(mainUrlInput.value, false, mainUrlInput, mainUrlIcons);
+    });
+  }
+
+  if (mainUrlIcons) {
+    mainUrlIcons.addEventListener('mousedown', (e) => {
+      // Prevent blur when clicking icon
+      e.preventDefault(); 
+      if (mainUrlIcons.classList.contains('state-send') || mainUrlIcons.classList.contains('state-refresh')) {
+        handleUrlSubmit(mainUrlInput?.value || '', false, mainUrlInput, mainUrlIcons);
+      }
     });
   }
 
   const extUrlInput = document.getElementById('external-url') as HTMLInputElement;
+  const extUrlIcons = document.getElementById('external-url-icons');
+  
   if (extUrlInput) {
+    extUrlInput.addEventListener('focus', () => setUrlState(extUrlIcons, 'send'));
+    extUrlInput.addEventListener('input', () => setUrlState(extUrlIcons, 'send'));
+    extUrlInput.addEventListener('blur', () => {
+      if (!extUrlIcons?.classList.contains('state-loading')) {
+        setUrlState(extUrlIcons, 'refresh');
+      }
+    });
     extUrlInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') processUrlInput(extUrlInput.value, true);
+      if (e.key === 'Enter') handleUrlSubmit(extUrlInput.value, true, extUrlInput, extUrlIcons);
+    });
+  }
+  
+  if (extUrlIcons) {
+    extUrlIcons.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (extUrlIcons.classList.contains('state-send') || extUrlIcons.classList.contains('state-refresh')) {
+        handleUrlSubmit(extUrlInput?.value || '', true, extUrlInput, extUrlIcons);
+      }
     });
   }
 
