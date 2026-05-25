@@ -1,6 +1,15 @@
 import './style.css';
 import resumeData from './data/resume.json';
 
+const musicModules = import.meta.glob('./music/*.mp3', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+const musicTracks = Object.entries(musicModules).map(([path, url]) => {
+  const fileName = path.split('/').pop() || 'Untitled.mp3';
+  return {
+    title: decodeURIComponent(fileName.replace(/\.mp3$/i, '').replace(/[-_]+/g, ' ')),
+    url
+  };
+});
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="layout">
     <header class="header">
@@ -153,6 +162,40 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
   </div>
 
+  <div class="music-window" id="music-window">
+    <div class="music-header">
+      <div class="window-controls">
+        <span class="control close" id="music-close" style="cursor: pointer;" title="Close Music"></span>
+        <span class="control minimize" id="music-min" style="cursor: pointer;" title="Minimize Music"></span>
+        <span class="control maximize" id="music-max" style="cursor: pointer;" title="Maximize Music"></span>
+      </div>
+      <div class="music-window-title">Idara Music</div>
+      <div class="music-header-spacer"></div>
+    </div>
+    <div class="music-content">
+      <div class="music-art">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+      </div>
+      <div class="music-meta">
+        <div class="music-label">Now Playing</div>
+        <div class="music-title" id="music-title">Add MP3 files to src/music</div>
+      </div>
+      <div class="music-controls">
+        <button class="music-control-btn" id="music-prev" type="button" title="Previous song">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6V6zm3 6 9-6v12l-9-6z"></path></svg>
+        </button>
+        <button class="music-control-btn music-play-btn" id="music-play" type="button" title="Play or pause">
+          <svg class="music-play-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+          <svg class="music-pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7V5zm6 0h4v14h-4V5z"></path></svg>
+        </button>
+        <button class="music-control-btn" id="music-next" type="button" title="Next song">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2V6zM6 18V6l9 6-9 6z"></path></svg>
+        </button>
+      </div>
+      <audio id="music-audio"></audio>
+    </div>
+  </div>
+
   <!-- macOS Dock -->
     <!-- macOS Dock -->
   <div class="macos-dock show" id="macos-dock">
@@ -193,6 +236,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="dock-divider"></div>
     
     <div class="dock-item">
+      <div class="dock-icon interactive icon-music" id="music-app-btn" title="Idara Music">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+      </div>
+      <span class="dock-tooltip">Idara Music</span>
+    </div>
+    <div class="dock-item">
       <div class="dock-icon interactive icon-browser" id="browser-app-btn" title="Web Browser">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
       </div>
@@ -227,6 +276,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div class="launchpad-group">
         <h3>Apps</h3>
         <div class="launchpad-grid">
+          <div class="launchpad-app interactive music-app-trigger">
+            <div class="app-icon icon-music"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
+            <span>Idara Music</span>
+          </div>
           <div class="launchpad-app interactive browser-app-trigger">
             <div class="app-icon icon-browser"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
             <span>Browser</span>
@@ -335,6 +388,7 @@ populateData();
 const mainBrowser = document.querySelector('.browser-window:not(.external-window)');
 const extBrowser = document.querySelector('.external-window');
 const dock = document.getElementById('macos-dock');
+const musicWindow = document.getElementById('music-window');
 
 const labels = document.querySelectorAll('.dock-icon[data-tab], .launchpad-app[data-tab]');
 const sections = document.querySelectorAll('.section');
@@ -700,6 +754,9 @@ const mainMin = document.getElementById('main-min');
 const mainMax = document.getElementById('main-max');
 const extMin = document.getElementById('external-min');
 const extMax = document.getElementById('external-max');
+const musicMin = document.getElementById('music-min');
+const musicMax = document.getElementById('music-max');
+const musicClose = document.getElementById('music-close');
 
 // Maximize
 mainMax?.addEventListener('click', () => {
@@ -707,6 +764,9 @@ mainMax?.addEventListener('click', () => {
 });
 extMax?.addEventListener('click', () => {
   extBrowser?.classList.toggle('fullscreen');
+});
+musicMax?.addEventListener('click', () => {
+  musicWindow?.classList.toggle('expanded');
 });
 
 // Minimize Logic
@@ -750,6 +810,89 @@ function minimizeWindow(windowEl: Element | null, title: string) {
 
 mainMin?.addEventListener('click', () => minimizeWindow(mainBrowser, "Idara's Resume"));
 extMin?.addEventListener('click', () => minimizeWindow(extBrowser, "External Site"));
+
+function openMusicWindow() {
+  musicWindow?.classList.remove('hidden', 'minimized');
+  document.getElementById('launchpad-overlay')?.classList.remove('show');
+}
+
+musicMin?.addEventListener('click', () => {
+  musicWindow?.classList.add('minimized');
+});
+
+musicClose?.addEventListener('click', () => {
+  musicWindow?.classList.add('hidden');
+  musicWindow?.classList.remove('expanded', 'minimized');
+});
+
+document.querySelectorAll('#music-app-btn, .music-app-trigger').forEach(musicAppBtn => {
+  musicAppBtn.addEventListener('click', openMusicWindow);
+});
+
+const musicAudio = document.getElementById('music-audio') as HTMLAudioElement | null;
+const musicTitle = document.getElementById('music-title');
+const musicPlay = document.getElementById('music-play');
+const musicPrev = document.getElementById('music-prev');
+const musicNext = document.getElementById('music-next');
+let currentTrackIndex = 0;
+
+function updateMusicTitle() {
+  if (!musicTitle) return;
+  musicTitle.textContent = musicTracks[currentTrackIndex]?.title || 'Add MP3 files to src/music';
+}
+
+function loadTrack(index: number, shouldPlay = false) {
+  if (!musicAudio || musicTracks.length === 0) {
+    updateMusicTitle();
+    return;
+  }
+
+  currentTrackIndex = (index + musicTracks.length) % musicTracks.length;
+  musicAudio.src = musicTracks[currentTrackIndex].url;
+  updateMusicTitle();
+
+  if (shouldPlay) {
+    musicAudio.play().catch(() => {
+      musicWindow?.classList.remove('playing');
+    });
+  }
+}
+
+musicPlay?.addEventListener('click', () => {
+  if (!musicAudio || musicTracks.length === 0) return;
+
+  if (!musicAudio.src) {
+    loadTrack(currentTrackIndex);
+  }
+
+  if (musicAudio.paused) {
+    musicAudio.play();
+  } else {
+    musicAudio.pause();
+  }
+});
+
+musicPrev?.addEventListener('click', () => {
+  loadTrack(currentTrackIndex - 1, !!musicAudio && !musicAudio.paused);
+});
+
+musicNext?.addEventListener('click', () => {
+  loadTrack(currentTrackIndex + 1, !!musicAudio && !musicAudio.paused);
+});
+
+musicAudio?.addEventListener('play', () => {
+  musicWindow?.classList.add('playing');
+});
+
+musicAudio?.addEventListener('pause', () => {
+  musicWindow?.classList.remove('playing');
+});
+
+musicAudio?.addEventListener('ended', () => {
+  loadTrack(currentTrackIndex + 1, true);
+});
+
+loadTrack(0);
 
 // Main Browser Close Button
 const mainClose = document.getElementById('main-close');
