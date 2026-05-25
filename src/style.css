@@ -435,6 +435,10 @@ body {
   display: none;
 }
 
+.music-mobile-close {
+  display: none;
+}
+
 .music-window.playing .music-play-icon {
   display: none;
 }
@@ -1309,6 +1313,9 @@ body {
   .music-control-btn {
     width: 30px;
     height: 30px;
+  }
+  .music-mobile-close {
+    display: flex;
   }
   .music-play-btn {
     width: 34px;

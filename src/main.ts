@@ -191,6 +191,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <button class="music-control-btn" id="music-next" type="button" title="Next song">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2V6zM6 18V6l9 6-9 6z"></path></svg>
         </button>
+        <button class="music-control-btn music-mobile-close" id="music-mobile-close" type="button" title="Close Music">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <audio id="music-audio"></audio>
     </div>
@@ -393,6 +396,18 @@ const musicHeader = document.querySelector<HTMLElement>('.music-header');
 
 const labels = document.querySelectorAll('.dock-icon[data-tab], .launchpad-app[data-tab]');
 const sections = document.querySelectorAll('.section');
+let topWindowZIndex = 1800;
+
+function bringToFront(windowEl: Element | null) {
+  if (windowEl instanceof HTMLElement) {
+    topWindowZIndex += 1;
+    windowEl.style.zIndex = String(topWindowZIndex);
+  }
+}
+
+function isWindowOpen(windowEl: Element | null) {
+  return !!windowEl && !windowEl.classList.contains('hidden') && !windowEl.classList.contains('minimized');
+}
 
 // Update visibility of the empty window placeholder
 function updatePlaceholder() {
@@ -407,24 +422,6 @@ function updatePlaceholder() {
       placeholder.classList.remove('show');
     }
   }
-}
-
-// Close external browser completely (closing other things)
-function closeExternalBrowser() {
-  const overlayEl = document.getElementById('external-overlay');
-  const iframeEl = document.getElementById('external-iframe') as HTMLIFrameElement;
-  if (overlayEl) {
-    overlayEl.classList.remove('show');
-    overlayEl.classList.remove('minimized-overlay');
-  }
-  if (extBrowser) {
-    extBrowser.classList.remove('minimized');
-  }
-  if (iframeEl) {
-    iframeEl.src = '';
-  }
-  const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
-  if (extMinIcon) extMinIcon.remove();
 }
 
 // Close/Hide main resume browser
@@ -445,17 +442,27 @@ function openMainBrowser() {
   if (mainBrowser) {
     mainBrowser.classList.remove('hidden');
     mainBrowser.classList.remove('minimized');
+    bringToFront(mainBrowser);
   }
   const mainMinIcon = document.querySelector(`.dock-icon[title="Idara's Resume"]`);
   if (mainMinIcon) mainMinIcon.remove();
 }
 
 function switchTab(tabId: string) {
+  const targetSection = document.getElementById(tabId);
+  const isCurrentTabOpen = isWindowOpen(mainBrowser) && targetSection?.classList.contains('active');
+
+  if (isCurrentTabOpen) {
+    closeMainBrowser();
+    updatePlaceholder();
+    document.getElementById('launchpad-overlay')?.classList.remove('show');
+    return;
+  }
+
   sections.forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.dock-icon').forEach(item => item.classList.remove('active'));
   document.querySelectorAll('.launchpad-app').forEach(item => item.classList.remove('active'));
   
-  const targetSection = document.getElementById(tabId);
   if (targetSection) targetSection.classList.add('active');
   
   document.querySelectorAll('.dock-icon[data-tab="' + tabId + '"], .launchpad-app[data-tab="' + tabId + '"]').forEach(el => el.classList.add('active'));
@@ -471,9 +478,6 @@ function switchTab(tabId: string) {
   if (launchpad && launchpad.classList.contains('show')) {
     launchpad.classList.remove('show');
   }
-
-  // Close all other open windows (external browser)
-  closeExternalBrowser();
 
   // Show/Open main resume browser
   openMainBrowser();
@@ -528,9 +532,6 @@ function openExternalOverlay(url: string) {
     const fallbackBtnEl = document.getElementById('external-open-btn-fallback') as HTMLAnchorElement;
 
     if (overlayEl && iframeEl && urlBarEl && openBtnEl) {
-      // Close the main resume browser to satisfy "closing all other open things"
-      closeMainBrowser();
-
       iframeEl.style.display = 'block';
       iframeEl.src = url;
       
@@ -543,6 +544,8 @@ function openExternalOverlay(url: string) {
       overlayEl.classList.remove('minimized-overlay');
       const extWindow = document.querySelector('.external-window');
       extWindow?.classList.remove('minimized');
+      bringToFront(overlayEl);
+      bringToFront(extWindow);
 
       // Clean up minimized icon if any
       const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
@@ -758,6 +761,7 @@ const extMax = document.getElementById('external-max');
 const musicMin = document.getElementById('music-min');
 const musicMax = document.getElementById('music-max');
 const musicClose = document.getElementById('music-close');
+const musicMobileClose = document.getElementById('music-mobile-close');
 
 // Maximize
 mainMax?.addEventListener('click', () => {
@@ -813,8 +817,21 @@ mainMin?.addEventListener('click', () => minimizeWindow(mainBrowser, "Idara's Re
 extMin?.addEventListener('click', () => minimizeWindow(extBrowser, "External Site"));
 
 function openMusicWindow() {
+  if (isWindowOpen(musicWindow)) {
+    musicWindow?.classList.add('hidden');
+    musicWindow?.classList.remove('expanded', 'minimized');
+    document.getElementById('launchpad-overlay')?.classList.remove('show');
+    return;
+  }
+
   musicWindow?.classList.remove('hidden', 'minimized');
+  bringToFront(musicWindow);
   document.getElementById('launchpad-overlay')?.classList.remove('show');
+}
+
+function closeMusicWindow() {
+  musicWindow?.classList.add('hidden');
+  musicWindow?.classList.remove('expanded', 'minimized');
 }
 
 musicMin?.addEventListener('click', () => {
@@ -822,9 +839,10 @@ musicMin?.addEventListener('click', () => {
 });
 
 musicClose?.addEventListener('click', () => {
-  musicWindow?.classList.add('hidden');
-  musicWindow?.classList.remove('expanded', 'minimized');
+  closeMusicWindow();
 });
+
+musicMobileClose?.addEventListener('click', closeMusicWindow);
 
 document.querySelectorAll('#music-app-btn, .music-app-trigger').forEach(musicAppBtn => {
   musicAppBtn.addEventListener('click', openMusicWindow);
@@ -956,14 +974,22 @@ browserAppBtns.forEach(browserAppBtn => {
     const iframeEl = document.getElementById('external-iframe') as HTMLIFrameElement;
     const launchpad = document.getElementById('launchpad-overlay');
     if (overlayEl) {
-      // Close all other open windows (main resume browser)
-      closeMainBrowser();
       launchpad?.classList.remove('show');
+
+      if (overlayEl.classList.contains('show') && !overlayEl.classList.contains('minimized-overlay') && !extBrowser?.classList.contains('minimized')) {
+        overlayEl.classList.remove('show');
+        overlayEl.classList.remove('minimized-overlay');
+        if (extBrowser) extBrowser.classList.remove('minimized');
+        updatePlaceholder();
+        return;
+      }
 
       overlayEl.classList.remove('minimized-overlay');
       overlayEl.classList.add('show');
       
       if (extBrowser) extBrowser.classList.remove('minimized');
+      bringToFront(overlayEl);
+      bringToFront(extBrowser);
       
       const extMinIcon = document.querySelector(`.dock-icon[title="External Site"]`);
       if (extMinIcon) extMinIcon.remove();
