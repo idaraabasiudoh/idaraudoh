@@ -419,7 +419,7 @@ function openExternalOverlay(url: string) {
 }
 
 // Handle Free-type URL Input
-const processUrlInput = (url: string, isExternal: boolean) => {
+const processUrlInput = (url: string) => {
     let cleanUrl = url.trim().toLowerCase();
     if (cleanUrl.startsWith('http://')) cleanUrl = cleanUrl.substring(7);
     if (cleanUrl.startsWith('https://')) cleanUrl = cleanUrl.substring(8);
@@ -442,18 +442,7 @@ const processUrlInput = (url: string, isExternal: boolean) => {
       }
     } else {
       const fullUrl = (url.startsWith('http://') || url.startsWith('https://')) ? url : 'https://' + url;
-      if (isExternal) {
-        const iframe = document.getElementById('external-iframe') as HTMLIFrameElement;
-        const extUrlBar = document.getElementById('external-url') as HTMLInputElement;
-        const openBtn = document.getElementById('external-open-btn') as HTMLAnchorElement;
-        const fallbackBtn = document.getElementById('external-open-btn-fallback') as HTMLAnchorElement;
-        if (iframe) iframe.src = fullUrl;
-        if (extUrlBar) extUrlBar.value = cleanUrl;
-        if (openBtn) openBtn.href = fullUrl;
-        if (fallbackBtn) fallbackBtn.href = fullUrl;
-      } else {
-        openExternalOverlay(fullUrl);
-      }
+      openExternalOverlay(fullUrl);
     }
 };
 
@@ -465,11 +454,11 @@ const processUrlInput = (url: string, isExternal: boolean) => {
     iconsEl.className = `url-icons state-${state}`;
   }
 
-  function handleUrlSubmit(url: string, isExternal: boolean, inputEl: HTMLInputElement, iconsEl: HTMLElement | null) {
+  function handleUrlSubmit(url: string, inputEl: HTMLInputElement, iconsEl: HTMLElement | null) {
     if (!url.trim()) return;
     setUrlState(iconsEl, 'loading');
     setTimeout(() => {
-      processUrlInput(url, isExternal);
+      processUrlInput(url);
       setUrlState(iconsEl, 'refresh');
       inputEl.blur();
     }, 500); // Dummy loading spin
@@ -484,7 +473,7 @@ const processUrlInput = (url: string, isExternal: boolean) => {
       }
     });
     mainUrlInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleUrlSubmit(mainUrlInput.value, false, mainUrlInput, mainUrlIcons);
+      if (e.key === 'Enter') handleUrlSubmit(mainUrlInput.value, mainUrlInput, mainUrlIcons);
     });
   }
 
@@ -493,7 +482,7 @@ const processUrlInput = (url: string, isExternal: boolean) => {
       // Prevent blur when clicking icon
       e.preventDefault(); 
       if (mainUrlIcons.classList.contains('state-send') || mainUrlIcons.classList.contains('state-refresh')) {
-        handleUrlSubmit(mainUrlInput?.value || '', false, mainUrlInput, mainUrlIcons);
+        handleUrlSubmit(mainUrlInput?.value || '', mainUrlInput, mainUrlIcons);
       }
     });
   }
@@ -510,7 +499,7 @@ const processUrlInput = (url: string, isExternal: boolean) => {
       }
     });
     extUrlInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleUrlSubmit(extUrlInput.value, true, extUrlInput, extUrlIcons);
+      if (e.key === 'Enter') handleUrlSubmit(extUrlInput.value, extUrlInput, extUrlIcons);
     });
   }
   
@@ -518,7 +507,7 @@ const processUrlInput = (url: string, isExternal: boolean) => {
     extUrlIcons.addEventListener('mousedown', (e) => {
       e.preventDefault();
       if (extUrlIcons.classList.contains('state-send') || extUrlIcons.classList.contains('state-refresh')) {
-        handleUrlSubmit(extUrlInput?.value || '', true, extUrlInput, extUrlIcons);
+        handleUrlSubmit(extUrlInput?.value || '', extUrlInput, extUrlIcons);
       }
     });
   }
@@ -591,6 +580,8 @@ function minimizeWindow(windowEl: Element | null, title: string) {
   if (windowEl === extBrowser) {
      const overlayEl = document.getElementById('external-overlay');
      overlayEl?.classList.add('minimized-overlay');
+     windowEl.classList.add('minimized');
+     return;
   }
   
   windowEl.classList.add('minimized');
