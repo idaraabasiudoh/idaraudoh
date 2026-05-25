@@ -78,13 +78,14 @@ body {
     padding: 0 30px;
   }
   .logo {
-    font-size: 11px;
-    line-height: 1.2;
+    font-size: 9px;
+    line-height: 1.15;
+    letter-spacing: -0.2px;
   }
 }
 
 .logo {
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.5px;
 }
@@ -1672,7 +1673,7 @@ body {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-primary);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04px;
 }
 
 #app {
