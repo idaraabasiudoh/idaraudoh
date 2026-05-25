@@ -233,7 +233,10 @@ const populateData = () => {
     expList.innerHTML = resumeData.experience.map(exp => `
       <div class="content-card interactive">
         <div class="card-info bold-info">
-          <h3>${exp.title}</h3>
+          <div class="card-header">
+            <h3>${exp.title}</h3>
+            ${exp.date ? `<span class="card-date">${exp.date}</span>` : ''}
+          </div>
           <p class="company">${exp.company}</p>
           <ul class="desc-list">
             ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
@@ -258,7 +261,10 @@ const populateData = () => {
     projList.innerHTML = resumeData.projects.map(proj => `
       <div class="content-card interactive">
         <div class="card-info bold-info">
-          <h3>${proj.title}</h3>
+          <div class="card-header">
+            <h3>${proj.title}</h3>
+            ${proj.date ? `<span class="card-date">${proj.date}</span>` : ''}
+          </div>
           <p class="company">${proj.subtitle}</p>
           <ul class="desc-list">
             ${proj.bullets.map(b => `<li>${b}</li>`).join('')}
@@ -296,7 +302,10 @@ const populateData = () => {
     eduList.innerHTML = resumeData.education.map(edu => `
       <div class="content-card interactive">
         <div class="card-info bold-info">
-          <h3>${edu.title}</h3>
+          <div class="card-header">
+            <h3>${edu.title}</h3>
+            ${edu.date ? `<span class="card-date">${edu.date}</span>` : ''}
+          </div>
           <p class="company">${edu.subtitle}</p>
           <ul class="desc-list">
             ${edu.bullets.map(b => `<li>${b}</li>`).join('')}

@@ -3,6 +3,7 @@
     {
       "title": "Software Engineering Intern",
       "company": "Shopify",
+      "date": "May 2026 – Present",
       "bullets": [
         "Contributing to Sidekick, Shopify's AI commerce assistant embedded in Shopify Admin, on the App Gen platform team supporting merchant-facing app generation flows using Ruby on Rails, TypeScript, React, Polaris, and Preact Signals.",
         "Investigating App Gen quota burn on the Sidekick App Gen GSD project, running BigQuery analysis on ~635k model calls (~$73k cost), surfacing a 143% rise in daily quota_exceeded events tied to the Claude 4.5 → 4.6 traffic shift.",
@@ -19,6 +20,7 @@
     {
       "title": "Software Developer",
       "company": "Magnet Forensics",
+      "date": "September 2025 – December 2025",
       "bullets": [
         "Contributed to the Magnet One SaaS platform, developing and maintaining features that support ingestion, storage, and management of large digital evidence files for law-enforcement and enterprise investigations.",
         "Implemented role-based access control for M1 Hub Storage, validating user access via authentication tokens and permissions, and building a fail-safe UI logic using React and TypeScript, to handle network delays and invalid tokens.",
@@ -36,6 +38,7 @@
     {
       "title": "Software Engineering Intern",
       "company": "Keel Minds",
+      "date": "April 2025 – August 2025",
       "bullets": [
         "Built Flutter UI components, responsive layouts, and modular widgets, on the company’s mental health SaaS application hosting 111,000+ patients, supporting rollout of new Figma designs on production branches.",
         "Contributed to backend routes in Node.js and wrote SQL queries to manage records of care provider/client sessions.",
@@ -54,6 +57,7 @@
     {
       "title": "Founder, Lead Dev",
       "company": "Gropad",
+      "date": "November 2024 – Present",
       "bullets": [
         "Built a cross-platform mobile app for matching people in schools and cities based on needs, wants and desires, using natural language with context intelligence; used Flutter and Supabase for frontend, database, authentication and media storage.",
         "Featured listing of goods, businesses, events, in-app messaging, and 2 serverless algorithms for background matching.",
@@ -81,6 +85,7 @@
     {
       "title": "Software Developer Intern",
       "company": "Wouessi Digital",
+      "date": "February 2025 – April 2025",
       "bullets": [
         "Contributed to the company portal using TypeScript, React, and Vue.js, integrating Supabase for authentication and PostgreSQL for data storage.",
         "Assisted in prototyping a content recommendation system using TensorFlow and Spark, for user personalization strategies.",
@@ -93,6 +98,7 @@
     {
       "title": "Gemini Groceries & Recipe",
       "subtitle": "React, Node.js, MongoDB, Gemini AI",
+      "date": "June 2025",
       "bullets": [
         "Developed a full-stack grocery and recipe assistant using React.js, Node.js, Express.js, and MongoDB Atlas, enabling users to create smart shopping lists with AI for meal suggestions and nutrition tracking.",
         "Integrated Google’s Gemini AI for image processing, to extract grocery items from shopping list photos and generate meal recommendations with nutritional facts and SerpAPI for product search and price matching between different grocery stores.",
@@ -110,6 +116,7 @@
     {
       "title": "Patheon AI",
       "subtitle": "Next.js, TS, ElevenLabs, Gemini",
+      "date": "July 2025",
       "bullets": [
         "Built full-stack AI Physics research platform using Next.js, TypeScript, ElevenLabs and Google Gemini 2.0 Flash API, generating hypothesis-based analysis with citations, theories and experimental suggestions.",
         "Implemented voice interaction with ElevenLabs integration, featuring voice cloning, speech-to-text transcription, and synchronized audio visualization for ease of accessibility.",
@@ -119,6 +126,7 @@
     {
       "title": "ASL Translation Software",
       "subtitle": "Python, OpenCV, TensorFlow",
+      "date": "November 2024",
       "bullets": [
         "Built and trained a Convolutional Neural Network (CNN) for Computer Vision with TensorFlow, Keras API, and OpenCV to translate American Sign Language (ASL) characters, achieving 90.5% accuracy during translation.",
         "Deployed model on a Python desktop app for demo during the cuHacking 2024 Hackathon, presenting how our software bridges communication gaps between deaf or non-verbal signers and non-signers."
@@ -134,6 +142,7 @@
     {
       "title": "Ride Along",
       "subtitle": "Flutter, Supabase",
+      "date": "March 2025",
       "bullets": [
         "Led development of a cross-platform ridesharing mobile & web app for university students using Flutter and Supabase, enabling carpooling with peers and cutting 45% commute costs spent on other platforms.",
         "Implemented in-app messaging and rendered live maps with driver and passenger location, using Flutter’s native geolocator dependency, ensuring stability across device platforms.",
@@ -196,6 +205,7 @@
     {
       "title": "Carleton University",
       "subtitle": "B.Eng Software Engineering (Co-op)",
+      "date": "September 2022 – April 2027",
       "bullets": [
         "Bachelor of Engineering, Software Engineering - Co-op, Final Year",
         "Scholarship: Award of Excellence for International Students, Entrance Scholarship, Henry Ford Scholarship ($15,000)",
