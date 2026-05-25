@@ -274,16 +274,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           </a>
         </div>
       </div>
-      <div class="browser-content" style="padding: 0; position: relative;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text-secondary); z-index: 0; padding: 20px; width: 100%;">
+      <div class="browser-content" style="padding: 0; position: relative; overflow: hidden; flex: 1;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--text-secondary); z-index: 0; padding: 20px; width: 100%; pointer-events: none;">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px; opacity: 0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
           <p>Loading external site...</p>
           <p style="font-size: 12px; margin-top: 5px; margin-bottom: 15px; opacity: 0.7;">If the site refuses to connect (due to security policies),<br/>please use the button below or in the menu bar.</p>
-          <a href="#" target="_blank" id="external-open-btn-fallback" style="display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: var(--text-primary); text-decoration: none; font-size: 13px; transition: all 0.2s;">
+          <a href="#" target="_blank" id="external-open-btn-fallback" style="display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: var(--text-primary); text-decoration: none; font-size: 13px; transition: all 0.2s; pointer-events: auto;">
             Open External Link
           </a>
         </div>
-        <iframe id="external-iframe" src="" frameborder="0" width="100%" height="100%" style="position: relative; z-index: 1; background: transparent; display: block;"></iframe>
+        <iframe id="external-iframe" src="" frameborder="0" width="100%" height="100%" style="position: relative; z-index: 1; background: transparent; display: block; pointer-events: auto; opacity: 0.99;"></iframe>
       </div>
     </div>
   </div>

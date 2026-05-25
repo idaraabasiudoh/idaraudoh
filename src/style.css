@@ -34,7 +34,7 @@
 }
 
 body {
-  background: linear-gradient(-45deg, #fbc2eb, #a6c1ee, #ffc3a0, #ffafbd);
+  background: linear-gradient(-45deg, #ffffff, #f5f5f5, #e0e0e0, #f8f8f8);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   color: var(--text-primary);
@@ -238,7 +238,10 @@ body {
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.2) transparent;
   overscroll-behavior: contain;
-  transform: translateZ(0); /* Fixes macOS WebKit backdrop-filter scroll bug */
+}
+
+.content-sections {
+  transform: translateZ(0);
 }
 
 .browser-content::-webkit-scrollbar {
@@ -587,7 +590,16 @@ body {
 }
 
 @media (max-width: 900px) {
-  .floating-label { display: none; }
+  .floating-label {
+    transform: scale(0.75);
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .tl { top: 2%; left: 2%; }
+  .tr { top: 12%; right: 2%; }
+  .bl { bottom: 2%; left: 2%; }
+  .br { bottom: 12%; right: 2%; }
+  .rm { top: 80%; right: 2%; }
 }
 
 /* Bottom Headline */
