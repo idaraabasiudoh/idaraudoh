@@ -1,4 +1,5 @@
-import './style.css'
+import './style.css';
+import resumeData from './data/resume.json';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="layout">
@@ -49,180 +50,22 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <div class="content-sections">
             <!-- Experience Section -->
             <div class="section active" id="experience">
-              <div class="cards-list">
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Software Developer</h3>
-                    <p class="company">Magnet Forensics</p>
-                    <ul class="desc-list">
-                      <li>Contributed to the Magnet One SaaS platform, developing and maintaining features that support ingestion, storage, and management of large digital evidence files for law-enforcement and enterprise investigations.</li>
-                      <li>Implemented role-based access control for M1 Hub Storage, validating user access via authentication tokens and permissions, and building a fail-safe UI logic using React and TypeScript, to handle network delays and invalid tokens.</li>
-                      <li>Extended the Desktop Storage Uploader by adding a user log download feature, implementing C#/.NET logic to collect, compress, and export application logs as JSON for end-users.</li>
-                      <li>Wrote tests to mock and verify functionality for M1 Hub Storage using Vitest and MSW, and .NET testing framework for the Desktop Storage Uploader to ensure reliability across edge cases.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Software Engineering Intern</h3>
-                    <p class="company">Keel Minds</p>
-                    <ul class="desc-list">
-                      <li>Built Flutter UI components, responsive layouts, and modular widgets, on the company’s mental health SaaS application hosting 111,000+ patients, supporting rollout of new Figma designs on production branches.</li>
-                      <li>Contributed to backend routes in Node.js and wrote SQL queries to manage records of care provider/client sessions.</li>
-                      <li>Used git workflows for team collaboration and GitHub Actions for automating build, test, and deployment pipelines.</li>
-                      <li>Participated in bi-weekly Q&A standups to assess internal and external product reviews and contribute to sprint planning.</li>
-                      <li>Received mentorship and practice on modern software architecture, design patterns, system design and HTTP.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Software Developer Intern</h3>
-                    <p class="company">Wouessi Digital</p>
-                    <ul class="desc-list">
-                      <li>Contributed to the company portal using TypeScript, React, and Vue.js, integrating Supabase for authentication and PostgreSQL for data storage.</li>
-                      <li>Assisted in prototyping a content recommendation system using TensorFlow and Spark, for user personalization strategies.</li>
-                      <li>Helped build a Tender Discovery platform using MongoDB and AWS S3/Lambda, simplifying tender application workflows.</li>
-                      <li>Collaborated on an internal Employee Management System with git access control and CI/CD setup using Docker.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Founder, Lead Dev</h3>
-                    <p class="company">Gropad</p>
-                    <ul class="desc-list">
-                      <li>Built a cross-platform mobile app for matching people in schools and cities based on needs, wants and desires, using natural language with context intelligence; used Flutter and Supabase for frontend, database, authentication and media storage.</li>
-                      <li>Featured listing of goods, businesses, events, in-app messaging, and 2 serverless algorithms for background matching.</li>
-                      <li>Used Firebase Cloud Messaging (FCM) tokens, deployed TypeScript serverless functions, Stripe APIs, and other modern frameworks, to support deep linking, push notifications, two-step verification, and payment processing.</li>
-                      <li>Adopted standard SWE practices for iterative and collaborative builds using git, MVVM design pattern, and database security with sanitized API and webhook invocations.</li>
-                    </ul>
-                    <div class="card-links">
-                      <a href="https://apps.apple.com/app/gropad/id6752580542" target="_blank" class="card-link">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        App Store
-                      </a>
-                      <a href="https://play.google.com/store/apps/details?id=com.gropad.app&pcampaignid=web_share" target="_blank" class="card-link">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        Google Play
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="cards-list" id="experience-list"></div>
             </div>
 
             <!-- Projects Section -->
             <div class="section" id="projects">
-              <div class="cards-list">
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Gemini Groceries & Recipe</h3>
-                    <p class="company">React, Node.js, MongoDB, Gemini AI</p>
-                    <ul class="desc-list">
-                      <li>Developed a full-stack grocery and recipe assistant using React.js, Node.js, Express.js, and MongoDB Atlas, enabling users to create smart shopping lists with AI for meal suggestions and nutrition tracking.</li>
-                      <li>Integrated Google’s Gemini AI for image processing, to extract grocery items from shopping list photos and generate meal recommendations with nutritional facts and SerpAPI for product search and price matching between different grocery stores.</li>
-                      <li>Implemented secure user authentication with JWT tokens, RESTful API design, and responsive UI using Tailwind CSS with interactive 3D components using Three.js.</li>
-                      <li>Deployed on AWS Amplify with CI/CD pipeline using custom amplify.yml configuration.</li>
-                    </ul>
-                    <div class="card-links">
-                      <a href="https://github.com/idaraabasiudoh/nachoaveragecart" target="_blank" class="card-link">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        GitHub
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Patheon AI</h3>
-                    <p class="company">Next.js, TS, ElevenLabs, Gemini</p>
-                    <ul class="desc-list">
-                      <li>Built full-stack AI Physics research platform using Next.js, TypeScript, ElevenLabs and Google Gemini 2.0 Flash API, generating hypothesis-based analysis with citations, theories and experimental suggestions.</li>
-                      <li>Implemented voice interaction with ElevenLabs integration, featuring voice cloning, speech-to-text transcription, and synchronized audio visualization for ease of accessibility.</li>
-                      <li>Designed 3D space-themed UI with liquid glass effects, custom cursor animations, and responsive architecture using Tailwind CSS and Framer Motion.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>ASL Translation Software</h3>
-                    <p class="company">Python, OpenCV, TensorFlow</p>
-                    <ul class="desc-list">
-                      <li>Built and trained a Convolutional Neural Network (CNN) for Computer Vision with TensorFlow, Keras API, and OpenCV to translate American Sign Language (ASL) characters, achieving 90.5% accuracy during translation.</li>
-                      <li>Deployed model on a Python desktop app for demo during the cuHacking 2024 Hackathon, presenting how our software bridges communication gaps between deaf or non-verbal signers and non-signers.</li>
-                    </ul>
-                    <div class="card-links">
-                      <a href="https://github.com/idaraabasiudoh/American-Sign-Language-ASL-Detection" target="_blank" class="card-link">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        GitHub
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Ride Along</h3>
-                    <p class="company">Flutter, Supabase</p>
-                    <ul class="desc-list">
-                      <li>Led development of a cross-platform ridesharing mobile & web app for university students using Flutter and Supabase, enabling carpooling with peers and cutting 45% commute costs spent on other platforms.</li>
-                      <li>Implemented in-app messaging and rendered live maps with driver and passenger location, using Flutter’s native geolocator dependency, ensuring stability across device platforms.</li>
-                      <li>Designed Figma pitch deck and placed 2nd at cuHacking 2025 for community impact; deployed on AWS Amplify with CI/CD.</li>
-                    </ul>
-                    <div class="card-links">
-                      <a href="https://github.com/idaraabasiudoh/ride_along" target="_blank" class="card-link">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        GitHub
-                      </a>
-                      <a href="https://fairseater.com/" target="_blank" class="card-link">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        MVP Demo
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="cards-list" id="projects-list"></div>
             </div>
 
             <!-- Skills Section -->
             <div class="section" id="skills">
-              <div class="skills-container">
-                <div class="skill-category">
-                  <h3>Languages</h3>
-                  <div class="tags">
-                    <span>Java</span><span>Python</span><span>JavaScript</span><span>C#</span><span>C/C++</span><span>Dart</span><span>TypeScript</span><span>SQL</span>
-                  </div>
-                </div>
-                <div class="skill-category">
-                  <h3>Frameworks</h3>
-                  <div class="tags">
-                    <span>React.js</span><span>Flutter</span><span>TensorFlow</span><span>PyTorch</span><span>.NET</span><span>Node.js</span><span>Express.js</span>
-                  </div>
-                </div>
-                <div class="skill-category">
-                  <h3>Tools & Cloud</h3>
-                  <div class="tags">
-                    <span>Git</span><span>Docker</span><span>AWS</span><span>Supabase</span><span>MongoDB</span><span>Linux</span><span>CI/CD</span>
-                  </div>
-                </div>
-              </div>
+              <div class="skills-container" id="skills-list"></div>
             </div>
 
             <!-- Education Section -->
             <div class="section" id="education">
-              <div class="cards-list">
-                <div class="content-card interactive">
-                  <div class="card-info bold-info">
-                    <h3>Carleton University</h3>
-                    <p class="company">B.Eng Software Engineering (Co-op)</p>
-                    <ul class="desc-list">
-                      <li>Bachelor of Engineering, Software Engineering - Co-op, Final Year</li>
-                      <li>Scholarship: Award of Excellence for International Students, Entrance Scholarship, Henry Ford Scholarship ($15,000)</li>
-                      <li>Coursework: Machine Learning, Operating Systems, Algorithms, Object-Oriented Programming, Design Patterns</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <div class="cards-list" id="education-list"></div>
             </div>
 
             </div>
@@ -353,6 +196,91 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
   </div>
 `
+
+// Populate content from resumeData
+const populateData = () => {
+  // Experience
+  const expList = document.getElementById('experience-list');
+  if (expList) {
+    expList.innerHTML = resumeData.experience.map(exp => `
+      <div class="content-card interactive">
+        <div class="card-info bold-info">
+          <h3>${exp.title}</h3>
+          <p class="company">${exp.company}</p>
+          <ul class="desc-list">
+            ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+          ${exp.links ? `
+          <div class="card-links">
+            ${exp.links.map(l => `
+            <a href="${l.url}" target="_blank" class="card-link">
+              ${l.icon || ''} ${l.name}
+            </a>
+            `).join('')}
+          </div>
+          ` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Projects
+  const projList = document.getElementById('projects-list');
+  if (projList) {
+    projList.innerHTML = resumeData.projects.map(proj => `
+      <div class="content-card interactive">
+        <div class="card-info bold-info">
+          <h3>${proj.title}</h3>
+          <p class="company">${proj.subtitle}</p>
+          <ul class="desc-list">
+            ${proj.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+          ${proj.links ? `
+          <div class="card-links">
+            ${proj.links.map(l => `
+            <a href="${l.url}" target="_blank" class="card-link">
+              ${l.icon || ''} ${l.name}
+            </a>
+            `).join('')}
+          </div>
+          ` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Skills
+  const skillsList = document.getElementById('skills-list');
+  if (skillsList) {
+    skillsList.innerHTML = resumeData.skills.map(skill => `
+      <div class="skill-category">
+        <h3>${skill.category}</h3>
+        <div class="tags">
+          ${skill.items.map(item => `<span>${item}</span>`).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Education
+  const eduList = document.getElementById('education-list');
+  if (eduList) {
+    eduList.innerHTML = resumeData.education.map(edu => `
+      <div class="content-card interactive">
+        <div class="card-info bold-info">
+          <h3>${edu.title}</h3>
+          <p class="company">${edu.subtitle}</p>
+          <ul class="desc-list">
+            ${edu.bullets.map(b => `<li>${b}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `).join('');
+  }
+};
+
+populateData();
+
 
 // Interactive Logic
 const labels = document.querySelectorAll('.dock-icon[data-tab], .launchpad-app[data-tab]');
