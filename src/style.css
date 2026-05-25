@@ -744,3 +744,46 @@ body {
   transform: scale(1.2) translateY(-10px);
   margin: 0 8px;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .browser-window {
+    width: 95%;
+    height: 85vh;
+  }
+  .browser-content {
+    padding: 15px 20px;
+  }
+  .content-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .date-range {
+    margin-bottom: 10px;
+  }
+  .bottom-headline h1 {
+    font-size: 36px;
+  }
+  .bottom-headline p {
+    font-size: 14px;
+  }
+  .browser-header {
+    padding: 0 10px;
+  }
+  .browser-url-bar {
+    max-width: 140px;
+    font-size: 10px;
+    padding: 0 5px;
+  }
+  .contact-link {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+  .card-info h3 {
+    font-size: 16px;
+  }
+  .dropdown-group-title, .dropdown-item {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
