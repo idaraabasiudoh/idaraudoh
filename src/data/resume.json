@@ -173,35 +173,42 @@
         "Java",
         "Python",
         "JavaScript",
+        "Ruby",
+        "Dart",
         "C#",
         "C/C++",
-        "Dart",
         "TypeScript",
+        "PHP",
+        "HTML/CSS",
         "SQL"
       ]
     },
     {
-      "category": "Frameworks",
+      "category": "Framework",
       "items": [
-        "React.js",
         "Flutter",
         "TensorFlow",
         "PyTorch",
         ".NET",
+        "Ruby on Rails",
         "Node.js",
-        "Express.js"
+        "React.js",
+        "Express.js",
+        "Flask"
       ]
     },
     {
-      "category": "Tools & Cloud",
+      "category": "Tools",
       "items": [
         "Git",
-        "Docker",
-        "AWS",
-        "Supabase",
+        "PostgreSQL",
         "MongoDB",
-        "Linux",
-        "CI/CD"
+        "Docker",
+        "Linux/Unix",
+        "CI/CD Pipelines",
+        "AWS",
+        "Microsoft Azure",
+        "Supabase"
       ]
     }
   ],
