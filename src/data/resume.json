@@ -1,12 +1,13 @@
 {
   "experience": [
     {
-      "title": "Software Engineering Intern",
+      "title": "Software Engineer Intern, Co-op",
       "company": "Shopify",
       "date": "May 2026 – Present",
       "bullets": [
-        "Contributing to Sidekick, Shopify's AI commerce assistant, on the App Gen platform team supporting AI app generation using Ruby on Rails backend and a reactive frontend powered by TypeScript, React, and Preact Signals.",
-        "Developing a UI Judge evaluation critic to score and assess AI-generated apps, against human-annotated benchmarks in feedback loops to improve live App Gen agent performance in real time."
+        "Contributed on Sidekick, Shopify's AI commerce assistant, on the App-Gen platform team supporting AI app generation using Ruby on Rails backend and a reactive frontend powered by TypeScript, React, and Preact Signals.",
+        "Developed a UI Judge evaluation critic to score and assess AI-generated apps, against human-annotated benchmarks, to give live feedback and improve App-Gen agent performance in real time.",
+        "Built browser CLI tools, supporting Shopify's AI agent by inspecting Shopify apps through off-screen rendering / screenshotting, logs, DOM, etc."
       ],
       "links": [
         {
@@ -14,7 +15,7 @@
           "url": "https://shopify.com",
           "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
         },
-         {
+        {
           "name": "Sidekick",
           "url": "https://www.shopify.com/ca/magic",
           "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
@@ -22,7 +23,7 @@
       ]
     },
     {
-      "title": "Software Developer",
+      "title": "Software Engineer Intern, Co-op",
       "company": "Magnet Forensics",
       "date": "September 2025 – December 2025",
       "bullets": [
@@ -40,7 +41,7 @@
       ]
     },
     {
-      "title": "Software Engineering Intern",
+      "title": "Software Engineering Intern, Co-op",
       "company": "Keel Minds",
       "date": "April 2025 – August 2025",
       "bullets": [
