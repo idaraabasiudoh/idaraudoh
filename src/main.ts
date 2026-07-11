@@ -1,5 +1,7 @@
 import './style.css';
 import resumeData from './data/resume.json';
+// @ts-ignore
+import contextData from './data/context?raw';
 
 const musicModules = import.meta.glob('./music/*.mp3', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 const musicTracks = Object.entries(musicModules).map(([path, url]) => {
@@ -199,8 +201,20 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
   </div>
 
+  <div class="ai-window hidden" id="ai-window">
+    <div class="ai-header">
+      <div class="window-controls">
+        <span class="control close" id="ai-close" style="cursor: pointer;" title="Close Chat"></span>
+        <span class="control minimize" id="ai-min" style="cursor: pointer;" title="Minimize Chat"></span>
+        <span class="control maximize" id="ai-max" style="cursor: pointer;" title="Maximize Chat"></span>
+      </div>
+      <div class="ai-window-title">Ask Idara AI</div>
+      <div class="ai-header-spacer"></div>
+    </div>
+    <div class="ai-content" id="ai-content"></div>
+  </div>
+
   <!-- macOS Dock -->
-    <!-- macOS Dock -->
   <div class="macos-dock show" id="macos-dock">
     <div class="dock-item">
       <div class="dock-icon interactive icon-launchpad" id="launchpad-btn" title="Launchpad">
@@ -238,6 +252,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     
     <div class="dock-divider"></div>
     
+    <div class="dock-item">
+      <div class="dock-icon interactive icon-ai" id="ai-app-btn" title="Ask Idara AI">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="9" cy="10" r="1"></circle><circle cx="15" cy="10" r="1"></circle></svg>
+      </div>
+      <span class="dock-tooltip">Ask Idara AI</span>
+    </div>
     <div class="dock-item">
       <div class="dock-icon interactive icon-music" id="music-app-btn" title="Idara Music">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
@@ -279,12 +299,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <div class="launchpad-group">
         <h3>Apps</h3>
         <div class="launchpad-grid">
+          <div class="launchpad-app interactive ai-app-trigger">
+            <div class="app-icon icon-ai"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="9" cy="10" r="1"></circle><circle cx="15" cy="10" r="1"></circle></svg></div>
+            <span>Ask Idara AI</span>
+          </div>
           <div class="launchpad-app interactive music-app-trigger">
-            <div class="app-icon icon-music"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
+            <div class="app-icon icon-music"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
             <span>Idara Music</span>
           </div>
           <div class="launchpad-app interactive browser-app-trigger">
-            <div class="app-icon icon-browser"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+            <div class="app-icon icon-browser"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
             <span>Browser</span>
           </div>
         </div>
@@ -1031,3 +1055,346 @@ if (mobileMenuBtn && headerContactsMenu) {
 
 // On load, update the placeholder so it shows up since no browser window is open by default
 updatePlaceholder();
+
+// --- Ask Idara AI Chatbot Implementation ---
+const aiWindow = document.getElementById('ai-window');
+const aiHeader = document.querySelector<HTMLElement>('.ai-header');
+const aiContent = document.getElementById('ai-content');
+const aiClose = document.getElementById('ai-close');
+const aiMin = document.getElementById('ai-min');
+const aiMax = document.getElementById('ai-max');
+
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyD8pktou2zs8-pkTA-B77FTggWkL5RkDKY';
+
+interface ChatMessage {
+  role: 'user' | 'model';
+  parts: { text: string }[];
+}
+
+let aiHistory: ChatMessage[] = [];
+
+function parseMarkdown(text: string): string {
+  let html = text.trim();
+  
+  // Safe HTML escape to prevent XSS
+  html = html
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  
+  // Convert standard markdown structures
+  // 1. Bold
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  // 2. Italic
+  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  // 3. Links
+  html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+  
+  // 4. Bullet lists
+  const lines = html.split('\n');
+  let inList = false;
+  const processedLines = lines.map(line => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+      const content = trimmed.substring(2);
+      if (!inList) {
+        inList = true;
+        return '<ul><li>' + content + '</li>';
+      }
+      return '<li>' + content + '</li>';
+    } else {
+      if (inList) {
+        inList = false;
+        return '</ul><p>' + line + '</p>';
+      }
+      return '<p>' + line + '</p>';
+    }
+  });
+  
+  html = processedLines.join('\n');
+  if (inList) {
+    html += '</ul>';
+  }
+  
+  // Clean up empty paragraphs
+  html = html.replace(/<p><\/p>/g, '');
+  return html;
+}
+
+async function callGeminiApi(): Promise<string> {
+  const apiKey = GEMINI_API_KEY;
+  if (!apiKey) throw new Error("API Key is missing.");
+
+  const systemInstructions = `You are the AI version of Idara-Abasi Udoh. Talk in the first-person singular (I, me, my, myself). You are talking to a visitor on my portfolio website.
+
+Here is all the information about me (my resume and added context):
+
+--- RESUME DATA (JSON) ---
+${JSON.stringify(resumeData, null, 2)}
+
+--- ADDED CONTEXT ---
+${contextData}
+
+CRITICAL RULES:
+1. Talk in the first-person singular (e.g., "I", "me", "my", "myself"). You are Idara.
+2. Respond using ONLY what is explicitly provided in the resume data and added context above.
+3. DO NOT assume, extrapolate, or invent any details about me. If a question asks about details not present in the provided facts, you MUST state that you do not have that information, or that I haven't added that to my profile yet. Do not make up answers.
+4. Keep your responses engaging, professional, and matching my personality, but strictly stick to the facts.
+5. If someone asks for a list, format it using bullet points.`;
+
+  // We map history to the format Gemini expects.
+  // Capping to last 10 messages for safety.
+  const historyToSubmit = aiHistory.slice(-10);
+
+  const requestBody = {
+    contents: historyToSubmit,
+    systemInstruction: {
+      parts: [
+        { text: systemInstructions }
+      ]
+    },
+    generationConfig: {
+      temperature: 0.1,
+      maxOutputTokens: 600
+    }
+  };
+
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody)
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData?.error?.message || `HTTP error! status: ${response.status}`);
+  }
+
+  const responseData = await response.json();
+  const text = responseData?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) {
+    throw new Error("Invalid response format received from Gemini.");
+  }
+
+  return text;
+}
+
+function renderAiView() {
+  if (!aiContent) return;
+
+  // Show Chat View directly
+  aiContent.innerHTML = `
+    <div class="ai-chat-view">
+      <div class="ai-messages-list" id="ai-messages-list"></div>
+      <div class="ai-chat-input-area">
+        <button class="ai-reset-key-btn" id="ai-reset-key-btn" title="Clear Chat History">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+        </button>
+        <input type="text" id="ai-chat-input-field" class="ai-chat-input" placeholder="Ask me anything..." autocomplete="off" />
+        <button class="ai-send-btn" id="ai-send-chat-btn" title="Send message">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </div>
+    </div>
+  `;
+
+  // Populate existing messages
+  const msgsList = document.getElementById('ai-messages-list');
+  if (msgsList) {
+    if (aiHistory.length === 0) {
+      // Welcome message
+      const welcomeDiv = document.createElement('div');
+      welcomeDiv.className = 'ai-message bot';
+      welcomeDiv.innerHTML = `<p>Hi! I'm the AI version of Idara. Ask me anything about my projects, education, or experience, and I'll answer based strictly on my resume and portfolio context!</p>`;
+      msgsList.appendChild(welcomeDiv);
+    } else {
+      aiHistory.forEach(msg => {
+        const div = document.createElement('div');
+        div.className = `ai-message ${msg.role === 'user' ? 'user' : 'bot'}`;
+        if (msg.role === 'user') {
+          div.textContent = msg.parts[0].text;
+        } else {
+          div.innerHTML = parseMarkdown(msg.parts[0].text);
+        }
+        msgsList.appendChild(div);
+      });
+    }
+    msgsList.scrollTop = msgsList.scrollHeight;
+  }
+
+  // Bind chat handlers
+  const sendBtn = document.getElementById('ai-send-chat-btn');
+  const inputField = document.getElementById('ai-chat-input-field') as HTMLInputElement;
+  const resetBtn = document.getElementById('ai-reset-key-btn');
+
+  resetBtn?.addEventListener('click', () => {
+    if (confirm("Are you sure you want to clear the chat history?")) {
+      aiHistory = [];
+      renderAiView();
+    }
+  });
+
+  const handleSend = async () => {
+    const query = inputField?.value.trim();
+    if (!query) return;
+
+    inputField.value = '';
+    
+    // Append user message to UI
+    const userDiv = document.createElement('div');
+    userDiv.className = 'ai-message user';
+    userDiv.textContent = query;
+    msgsList?.appendChild(userDiv);
+    if (msgsList) msgsList.scrollTop = msgsList.scrollHeight;
+
+    // Add to history
+    aiHistory.push({ role: 'user', parts: [{ text: query }] });
+
+    // Append typing indicator
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'ai-typing-indicator';
+    typingIndicator.id = 'ai-typing-indicator';
+    typingIndicator.innerHTML = `
+      <span>Thinking</span>
+      <div class="ai-typing-dot"></div>
+      <div class="ai-typing-dot"></div>
+      <div class="ai-typing-dot"></div>
+    `;
+    msgsList?.appendChild(typingIndicator);
+    if (msgsList) msgsList.scrollTop = msgsList.scrollHeight;
+
+    try {
+      const responseText = await callGeminiApi();
+      
+      // Remove typing indicator
+      document.getElementById('ai-typing-indicator')?.remove();
+
+      // Append bot message to UI
+      const botDiv = document.createElement('div');
+      botDiv.className = 'ai-message bot';
+      botDiv.innerHTML = parseMarkdown(responseText);
+      msgsList?.appendChild(botDiv);
+      if (msgsList) msgsList.scrollTop = msgsList.scrollHeight;
+
+      // Add to history
+      aiHistory.push({ role: 'model', parts: [{ text: responseText }] });
+    } catch (err: any) {
+      document.getElementById('ai-typing-indicator')?.remove();
+      const errDiv = document.createElement('div');
+      errDiv.className = 'ai-message bot';
+      errDiv.style.color = '#ef4444';
+      errDiv.innerHTML = `<p>Error: ${err.message || 'Failed to call Gemini API.'}</p>`;
+      msgsList?.appendChild(errDiv);
+      if (msgsList) msgsList.scrollTop = msgsList.scrollHeight;
+      
+      // Pop user query if it failed to keep history clean
+      aiHistory.pop();
+    }
+  };
+
+  sendBtn?.addEventListener('click', handleSend);
+  inputField?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleSend();
+  });
+}
+
+function openAiWindow() {
+  if (isWindowOpen(aiWindow)) {
+    aiWindow?.classList.add('hidden');
+    aiWindow?.classList.remove('expanded', 'minimized');
+    document.getElementById('launchpad-overlay')?.classList.remove('show');
+    return;
+  }
+
+  aiWindow?.classList.remove('hidden', 'minimized');
+  bringToFront(aiWindow);
+  document.getElementById('launchpad-overlay')?.classList.remove('show');
+  
+  // Clean up minimized icon if any
+  const aiMinIcon = document.querySelector(`.dock-icon[title="Ask Idara AI Window"]`);
+  if (aiMinIcon) aiMinIcon.remove();
+  
+  renderAiView();
+}
+
+function closeAiWindow() {
+  aiWindow?.classList.add('hidden');
+  aiWindow?.classList.remove('expanded', 'minimized');
+}
+
+aiClose?.addEventListener('click', closeAiWindow);
+
+aiMin?.addEventListener('click', () => {
+  if (!aiWindow || !dock) return;
+  aiWindow.classList.add('minimized');
+  
+  const dockIcon = document.createElement('div');
+  dockIcon.className = 'dock-icon';
+  dockIcon.title = "Ask Idara AI Window";
+  dockIcon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="9" cy="10" r="1"></circle><circle cx="15" cy="10" r="1"></circle></svg>`;
+  
+  dockIcon.addEventListener('click', () => {
+    aiWindow.classList.remove('minimized', 'hidden');
+    dockIcon.remove();
+  });
+  
+  dock.appendChild(dockIcon);
+});
+
+aiMax?.addEventListener('click', () => {
+  aiWindow?.classList.toggle('expanded');
+});
+
+document.querySelectorAll('#ai-app-btn, .ai-app-trigger').forEach(btn => {
+  btn.addEventListener('click', openAiWindow);
+});
+
+// Dragging Logic
+let isDraggingAi = false;
+let aiDragOffsetX = 0;
+let aiDragOffsetY = 0;
+
+aiHeader?.addEventListener('pointerdown', (event: PointerEvent) => {
+  const target = event.target as HTMLElement;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
+  if (target.closest('.window-controls')) return;
+  if (!(aiWindow instanceof HTMLElement)) return;
+
+  const rect = aiWindow.getBoundingClientRect();
+  isDraggingAi = true;
+  aiDragOffsetX = event.clientX - rect.left;
+  aiDragOffsetY = event.clientY - rect.top;
+  aiWindow.classList.add('dragging');
+  aiWindow.style.left = `${rect.left}px`;
+  aiWindow.style.top = `${rect.top}px`;
+  aiWindow.style.right = 'auto';
+  aiWindow.style.bottom = 'auto';
+  aiWindow.setPointerCapture(event.pointerId);
+});
+
+aiWindow?.addEventListener('pointermove', (event: PointerEvent) => {
+  if (!isDraggingAi || !(aiWindow instanceof HTMLElement)) return;
+
+  const maxLeft = window.innerWidth - aiWindow.offsetWidth;
+  const maxTop = window.innerHeight - aiWindow.offsetHeight;
+  const nextLeft = Math.min(Math.max(0, event.clientX - aiDragOffsetX), Math.max(0, maxLeft));
+  const nextTop = Math.min(Math.max(0, event.clientY - aiDragOffsetY), Math.max(0, maxTop));
+  aiWindow.style.left = `${nextLeft}px`;
+  aiWindow.style.top = `${nextTop}px`;
+});
+
+function stopDraggingAi(event?: PointerEvent) {
+  if (!isDraggingAi || !(aiWindow instanceof HTMLElement)) return;
+  isDraggingAi = false;
+  aiWindow.classList.remove('dragging');
+  if (event) {
+    aiWindow.releasePointerCapture(event.pointerId);
+  }
+}
+
+aiWindow?.addEventListener('pointerup', stopDraggingAi);
+aiWindow?.addEventListener('pointercancel', stopDraggingAi);
+
+
