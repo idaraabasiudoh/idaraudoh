@@ -201,7 +201,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
   </div>
 
-  <div class="ai-window hidden" id="ai-window">
+  <div class="ai-window" id="ai-window">
     <div class="ai-header">
       <div class="window-controls">
         <span class="control close" id="ai-close" style="cursor: pointer;" title="Close Chat"></span>
@@ -1396,5 +1396,8 @@ function stopDraggingAi(event?: PointerEvent) {
 
 aiWindow?.addEventListener('pointerup', stopDraggingAi);
 aiWindow?.addEventListener('pointercancel', stopDraggingAi);
+
+// Initialize AI chatbot view
+renderAiView();
 
 
