@@ -201,7 +201,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
   </div>
 
-  <div class="ai-window" id="ai-window">
+  <div class="ai-window hidden" id="ai-window">
     <div class="ai-header">
       <div class="window-controls">
         <span class="control close" id="ai-close" style="cursor: pointer;" title="Close Chat"></span>
@@ -1399,5 +1399,10 @@ aiWindow?.addEventListener('pointercancel', stopDraggingAi);
 
 // Initialize AI chatbot view
 renderAiView();
+
+// Open by default on desktop, not mobile
+if (!window.matchMedia('(max-width: 768px)').matches) {
+  aiWindow?.classList.remove('hidden');
+}
 
 
