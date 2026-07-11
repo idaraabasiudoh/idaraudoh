@@ -1207,7 +1207,7 @@ function renderAiView() {
       // Welcome message
       const welcomeDiv = document.createElement('div');
       welcomeDiv.className = 'ai-message bot';
-      welcomeDiv.innerHTML = `<p>Hi! I'm Idara's AI. Ask me anything about my projects, education, or experience.</p>`;
+      welcomeDiv.innerHTML = `<p>Hi, I'm Idara's AI. Ask me anything about my projects, education, or experience.</p>`;
       msgsList.appendChild(welcomeDiv);
     } else {
       aiHistory.forEach(msg => {
