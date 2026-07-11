@@ -1064,7 +1064,7 @@ const aiClose = document.getElementById('ai-close');
 const aiMin = document.getElementById('ai-min');
 const aiMax = document.getElementById('ai-max');
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyD8pktou2zs8-pkTA-B77FTggWkL5RkDKY';
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 interface ChatMessage {
   role: 'user' | 'model';
