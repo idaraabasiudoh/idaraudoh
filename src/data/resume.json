@@ -57,7 +57,7 @@
     },
     {
       "title": "Founder, Lead Dev",
-      "company": "Gropad (Ping)",
+      "company": "Ping",
       "date": "November 2024 – Present",
       "bullets": [
         "Built a cross-platform mobile app for matching people in schools and cities based on needs, wants and desires, using natural language with context intelligence; used Flutter and Supabase for frontend, database, authentication and media storage.",
@@ -107,7 +107,7 @@
       "links": [
         {
           "name": "Website",
-          "url": "#",
+          "url": "https://www.screendial.com",
           "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
         }
       ]
