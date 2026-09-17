@@ -3,11 +3,11 @@
     {
       "title": "Software Engineer Intern, Co-op",
       "company": "Shopify",
-      "date": "May 2026 – Present",
+      "date": "May 2026 – Aug 2026",
       "bullets": [
         "Contributed on Sidekick, Shopify's AI commerce assistant, on the App-Gen platform team supporting AI app generation using Ruby on Rails backend and a reactive frontend powered by TypeScript, React, and Preact Signals.",
-        "Developed a UI Judge evaluation critic to score and assess AI-generated apps, against human-annotated benchmarks, to give live feedback and improve App-Gen agent performance in real time.",
-        "Built browser CLI tools, supporting Shopify's AI agent by inspecting Shopify apps through off-screen rendering / screenshotting, logs, DOM, etc."
+        "Built a non-intrusive screenshot tool that captures and rasterizes Shopify web routes in offscreen sandboxed containers to generate cropped or full webp images of users’ apps, to provide Sidekick a visual understanding of app layouts.",
+        "Developed a UI Judge evaluation critic to score and assess AI-generated apps, against human-annotated benchmarks, to give live feedback and improve App-Gen agent performance in real time."
       ],
       "links": [
         {
@@ -25,12 +25,11 @@
     {
       "title": "Software Engineer Intern, Co-op",
       "company": "Magnet Forensics",
-      "date": "September 2025 – December 2025",
+      "date": "Sep 2025 – Dec 2025",
       "bullets": [
-        "Contributed to the Magnet One SaaS platform, developing and maintaining features that support ingestion, storage, and management of large digital evidence files for law-enforcement and enterprise investigations.",
-        "Implemented role-based access control for M1 Hub Storage, validating user access via authentication tokens and permissions, and building a fail-safe UI logic using React and TypeScript, to handle network delays and invalid tokens.",
-        "Extended the Desktop Storage Uploader by adding a user log download feature, implementing C#/.NET logic to collect, compress, and export application logs as JSON for end-users.",
-        "Wrote tests to mock and verify functionality for M1 Hub Storage using Vitest and MSW, and .NET testing framework for the Desktop Storage Uploader to ensure reliability across edge cases."
+        "Developed token-based role-based access control for M1 Hub Storage, building fail-safe UI logic in React and TypeScript to handle network delays securely.",
+        "Implemented a C#/.NET logging utility for the Desktop Storage Uploader to compress and export JSON application logs, validating edge cases via Vitest and MSW.",
+        "Worked in a cross-functional Agile team of software developers, UI/UX designers, and product managers to refine Jira tickets, participate in code reviews, and discuss upcoming technologies and architectural improvements."
       ],
       "links": [
         {
@@ -41,15 +40,12 @@
       ]
     },
     {
-      "title": "Software Engineering Intern, Co-op",
+      "title": "Software Engineer Intern, Co-op",
       "company": "Keel Minds",
-      "date": "April 2025 – August 2025",
+      "date": "Apr 2025 – Aug 2025",
       "bullets": [
-        "Built Flutter UI components, responsive layouts, and modular widgets, on the company’s mental health SaaS application hosting 111,000+ patients, supporting rollout of new Figma designs on production branches.",
-        "Contributed to backend routes in Node.js and wrote SQL queries to manage records of care provider/client sessions.",
-        "Used git workflows for team collaboration and GitHub Actions for automating build, test, and deployment pipelines.",
-        "Participated in bi-weekly Q&A standups to assess internal and external product reviews and contribute to sprint planning.",
-        "Received mentorship and practice on modern software architecture, design patterns, system design and HTTP."
+        "Migrated legacy Flutter UI to newer, modular, and reusable widgets from design, on a patient application serving 111,000+ users, providing web accessibility support and improving testability.",
+        "Contributed to backend routes in Node.js and wrote SQL queries to manage records of care provider/client sessions."
       ],
       "links": [
         {
@@ -61,7 +57,7 @@
     },
     {
       "title": "Founder, Lead Dev",
-      "company": "Gropad",
+      "company": "Gropad (Ping)",
       "date": "November 2024 – Present",
       "bullets": [
         "Built a cross-platform mobile app for matching people in schools and cities based on needs, wants and desires, using natural language with context intelligence; used Flutter and Supabase for frontend, database, authentication and media storage.",
@@ -92,14 +88,30 @@
       "company": "Wouessi Digital",
       "date": "February 2025 – April 2025",
       "bullets": [
-        "Contributed to the company portal using TypeScript, React, and Vue.js, integrating Supabase for authentication and PostgreSQL for data storage.",
-        "Assisted in prototyping a content recommendation system using TensorFlow and Spark, for user personalization strategies.",
-        "Helped build a Tender Discovery platform using MongoDB and AWS S3/Lambda, simplifying tender application workflows.",
-        "Collaborated on an internal Employee Management System with git access control and CI/CD setup using Docker."
+        "Integrated authentication and PostgreSQL storage into a corporate portal web application using React, TypeScript, and Vue.js.",
+        "Developed a Tender Discovery platform using MongoDB and AWS S3/Lambda, packaging the microservices into Docker containers with integrated CI/CD."
       ]
     }
   ],
   "projects": [
+    {
+      "title": "Screendial",
+      "subtitle": "Native Desktop Copilot | Rust, TypeScript, Tauri v2",
+      "date": "September 2026",
+      "bullets": [
+        "Developed an agentic desktop voice assistant that overlays directly on your screen to guide you through complex desktop or web software workflows with supporting tools and skills for different scenarios.",
+        "Used Tauri v2 and Rust to perform hardware-accelerated screen capture in <15ms, with TypeScript for on-screen interface.",
+        "Built a highlight tool that draws a bounding red box around specific UI elements on-screen such as buttons and menus, using normalized 2D coordinates, relative to the user's monitor resolution.",
+        "Implemented a tool that renders interactive UI cards over the screen, such as checklist steps, copyable code snippets, or info cards, to provide extra guidance along model results."
+      ],
+      "links": [
+        {
+          "name": "Website",
+          "url": "#",
+          "icon": "<svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path><polyline points=\"15 3 21 3 21 9\"></polyline><line x1=\"10\" y1=\"14\" x2=\"21\" y2=\"3\"></line></svg>"
+        }
+      ]
+    },
     {
       "title": "Gemini Groceries & Recipe",
       "subtitle": "React, Node.js, MongoDB, Gemini AI",
@@ -174,13 +186,14 @@
         "Java",
         "Python",
         "JavaScript",
+        "HTML/CSS3",
+        "Swift",
         "Ruby",
         "Dart",
         "C#",
         "C/C++",
         "TypeScript",
         "PHP",
-        "HTML/CSS",
         "SQL"
       ]
     },
@@ -201,15 +214,26 @@
     {
       "category": "Tools",
       "items": [
+        "AWS",
+        "GCP",
         "Git",
         "PostgreSQL",
         "MongoDB",
         "Docker",
-        "Linux/Unix",
         "CI/CD Pipelines",
-        "AWS",
         "Microsoft Azure",
         "Supabase"
+      ]
+    },
+    {
+      "category": "Others",
+      "items": [
+        "LLM",
+        "Jira",
+        "Agile - Scrum",
+        "Unit Testing",
+        "Functional Programming",
+        "Relational Database"
       ]
     }
   ],
@@ -217,11 +241,11 @@
     {
       "title": "Carleton University",
       "subtitle": "B.Eng Software Engineering (Co-op)",
-      "date": "September 2022 – April 2027",
+      "date": "Sep 2022 - Apr 2027",
       "bullets": [
-        "Bachelor of Engineering, Software Engineering - Co-op, Final Year",
+        "Bachelor of Engineering, Software Engineering, 4th Year, Co-op",
         "Scholarship: Award of Excellence for International Students, Entrance Scholarship, Henry Ford Scholarship ($15,000)",
-        "Coursework: Machine Learning, Operating Systems, Algorithms, Object-Oriented Programming, Design Patterns"
+        "Coursework: Machine Learning, Data Structures & Algorithms, Object-Oriented Programming, Design Patterns"
       ]
     }
   ]
